@@ -7,7 +7,7 @@
         {
             "name": "Cortex Debug",
             "cwd": "${workspaceFolder}",
-            "executable": "./Build/Laboratory_Practice.elf",
+            "executable": "./build_F429ZI/STM32F429ZI.elf",
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",

@@ -24,7 +24,7 @@ TARGET_VERSION = ZI
 # debug build?
 DEBUG = 1
 # optimization
-OPT = -Og
+OPT = -O0
 
 #######################################
 # paths
@@ -210,14 +210,12 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = $(LD) -Wl,--no-warn-rwx-segment # "-Wl,--no-warn-rwx-segment" - отключает вывод предупреждения о том,
-#										   # что .elf содержит сегмент LOAD с правами RWX (Read, Write, X)
-#										   # Нужно разбораться с этой проблемой  
-#										   #
+LDSCRIPT = $(LD) 
+
 # libraries
 LIBS = -lc -lm -lnosys 
 LIBDIR = 
-LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET_SERIES)$(TARGET_VERSION).map,--cref -Wl,--gc-sections
+LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET_SERIES)$(TARGET_VERSION).map,--cref -Wl,--gc-sections -Wl,--no-warn-rwx-segment
 
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET_SERIES)$(TARGET_VERSION).elf $(BUILD_DIR)/$(TARGET_SERIES)$(TARGET_VERSION).hex $(BUILD_DIR)/$(TARGET_SERIES)$(TARGET_VERSION).bin 
@@ -261,7 +259,8 @@ $(BUILD_DIR):
 # clean up
 #######################################
 clean:
-	@"rm" -fR $(BUILD_DIR)
+	@if exist $(BUILD_DIR) rmdir /s /q $(BUILD_DIR)
+	@echo clean $(BUILD_DIR) is done!
   
 #######################################
 # openocd
