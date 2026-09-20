@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cczScKH2.s 			page 1
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -28,157 +28,79 @@ ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cczScKH2.s 			page 1
   25              		.thumb_func
   27              	main:
   28              	.LFB0:
-   1:Core/Src/main.c **** #include <stdint.h>
-   2:Core/Src/main.c **** int main(void) {
-  29              		.loc 1 2 16
+   1:Core/Src/main.c **** #include "init.h"
+   2:Core/Src/main.c **** 
+   3:Core/Src/main.c **** int main(void) {
+  29              		.loc 1 3 16
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 1, uses_anonymous_args = 0
-  33              		@ link register save eliminated.
-  34 0000 80B4     		push	{r7}
-  35              	.LCFI0:
-  36              		.cfi_def_cfa_offset 4
-  37              		.cfi_offset 7, -4
+  33 0000 80B5     		push	{r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
   38 0002 00AF     		add	r7, sp, #0
   39              	.LCFI1:
   40              		.cfi_def_cfa_register 7
-   3:Core/Src/main.c ****     *(uint32_t*)(0x40023800UL + 0x30UL) |= 0x06; //Power on B and C ports
-  41              		.loc 1 3 5
-  42 0004 1D4B     		ldr	r3, .L5
-  43 0006 1B68     		ldr	r3, [r3]
-  44 0008 1C4A     		ldr	r2, .L5
-  45              		.loc 1 3 41
-  46 000a 43F00603 		orr	r3, r3, #6
-  47 000e 1360     		str	r3, [r2]
-   4:Core/Src/main.c ****     *(uint32_t*)(0x40020400UL + 0x00UL) |= 0x4000; // Output Mode 
-  48              		.loc 1 4 5
-  49 0010 1B4B     		ldr	r3, .L5+4
-  50 0012 1B68     		ldr	r3, [r3]
-  51 0014 1A4A     		ldr	r2, .L5+4
-  52              		.loc 1 4 41
-  53 0016 43F48043 		orr	r3, r3, #16384
-  54 001a 1360     		str	r3, [r2]
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cczScKH2.s 			page 2
+   4:Core/Src/main.c **** 
+   5:Core/Src/main.c ****     GPIO_Ini();
+  41              		.loc 1 5 5
+  42 0004 FFF7FEFF 		bl	GPIO_Ini
+  43              	.L4:
+   6:Core/Src/main.c ****     while(1){
+   7:Core/Src/main.c ****         if(READ_BIT(GPIOC_IDR, GPIOC_IDR_PIN13) != 0){
+  44              		.loc 1 7 12
+  45 0008 094B     		ldr	r3, .L5
+  46 000a 1B68     		ldr	r3, [r3]
+  47 000c 03F40053 		and	r3, r3, #8192
+  48              		.loc 1 7 11
+  49 0010 002B     		cmp	r3, #0
+  50 0012 06D0     		beq	.L2
+   8:Core/Src/main.c ****             SET_BIT(GPIOB_BSRR, GPIOB_BSRR_PIN7_SET); 
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s 			page 2
 
 
-   5:Core/Src/main.c ****     *(uint32_t*)(0x40020400UL + 0x04UL) |= 0x00; // Push-pull register
-  55              		.loc 1 5 41
-  56 001c 194B     		ldr	r3, .L5+8
-  57              		.loc 1 5 5
-  58 001e 194A     		ldr	r2, .L5+8
-  59              		.loc 1 5 41
-  60 0020 1B68     		ldr	r3, [r3]
-  61 0022 1360     		str	r3, [r2]
-   6:Core/Src/main.c ****     *(uint32_t*)(0x40020400UL + 0x08UL) |= 0x4000;  // Message's speed
-  62              		.loc 1 6 5
-  63 0024 184B     		ldr	r3, .L5+12
-  64 0026 1B68     		ldr	r3, [r3]
-  65 0028 174A     		ldr	r2, .L5+12
-  66              		.loc 1 6 41
-  67 002a 43F48043 		orr	r3, r3, #16384
-  68 002e 1360     		str	r3, [r2]
-   7:Core/Src/main.c ****     *(uint32_t*)(0x40020400UL + 0x0CUL) |= 0x00; // No pull-up, pull-down
-  69              		.loc 1 7 41
-  70 0030 164B     		ldr	r3, .L5+16
-  71              		.loc 1 7 5
-  72 0032 164A     		ldr	r2, .L5+16
-  73              		.loc 1 7 41
-  74 0034 1B68     		ldr	r3, [r3]
-  75 0036 1360     		str	r3, [r2]
-   8:Core/Src/main.c ****  
-   9:Core/Src/main.c ****     *(uint32_t*)(0x40020800UL + 0x00UL) |= 0x00;   // Need setting Input/Output mode
-  76              		.loc 1 9 41
-  77 0038 154B     		ldr	r3, .L5+20
-  78              		.loc 1 9 5
-  79 003a 154A     		ldr	r2, .L5+20
-  80              		.loc 1 9 41
-  81 003c 1B68     		ldr	r3, [r3]
-  82 003e 1360     		str	r3, [r2]
-  10:Core/Src/main.c ****     *(uint32_t*)(0x40020800UL + 0x04UL) |= 0x00;  // push-pull register
-  83              		.loc 1 10 41
-  84 0040 144B     		ldr	r3, .L5+24
-  85              		.loc 1 10 5
-  86 0042 144A     		ldr	r2, .L5+24
-  87              		.loc 1 10 41
-  88 0044 1B68     		ldr	r3, [r3]
-  89 0046 1360     		str	r3, [r2]
-  11:Core/Src/main.c ****     *(uint32_t*)(0x40020800UL + 0x08UL) |= 0x08000000;    // Message's speed
-  90              		.loc 1 11 5
-  91 0048 134B     		ldr	r3, .L5+28
-  92 004a 1B68     		ldr	r3, [r3]
-  93 004c 124A     		ldr	r2, .L5+28
-  94              		.loc 1 11 41
-  95 004e 43F00063 		orr	r3, r3, #134217728
-  96 0052 1360     		str	r3, [r2]
-  12:Core/Src/main.c ****     *(uint32_t*)(0x40020800UL + 0x0CUL) |= 0x00;    // Pull-up or pull-down
-  97              		.loc 1 12 41
-  98 0054 114B     		ldr	r3, .L5+32
-  99              		.loc 1 12 5
- 100 0056 114A     		ldr	r2, .L5+32
- 101              		.loc 1 12 41
- 102 0058 1B68     		ldr	r3, [r3]
- 103 005a 1360     		str	r3, [r2]
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cczScKH2.s 			page 3
-
-
- 104              	.L4:
-  13:Core/Src/main.c **** 
-  14:Core/Src/main.c ****     while(1){
-  15:Core/Src/main.c ****         if((*(uint32_t*)(0x40020800UL + 0x10UL) & 0x2000UL) != 0){
- 105              		.loc 1 15 13
- 106 005c 104B     		ldr	r3, .L5+36
- 107 005e 1B68     		ldr	r3, [r3]
- 108              		.loc 1 15 49
- 109 0060 03F40053 		and	r3, r3, #8192
- 110              		.loc 1 15 11
- 111 0064 002B     		cmp	r3, #0
- 112 0066 03D0     		beq	.L2
-  16:Core/Src/main.c ****             *(uint32_t*)(0x40020400UL + 0x18UL) = 0x80; 
- 113              		.loc 1 16 13
- 114 0068 0E4B     		ldr	r3, .L5+40
- 115              		.loc 1 16 49
- 116 006a 8022     		movs	r2, #128
- 117 006c 1A60     		str	r2, [r3]
- 118 006e F5E7     		b	.L4
- 119              	.L2:
-  17:Core/Src/main.c ****         }
-  18:Core/Src/main.c ****         else{
-  19:Core/Src/main.c ****             *(uint32_t*)(0x40020400UL + 0x18UL) = 0x00800000; 
- 120              		.loc 1 19 13
- 121 0070 0C4B     		ldr	r3, .L5+40
- 122              		.loc 1 19 49
- 123 0072 4FF40002 		mov	r2, #8388608
- 124 0076 1A60     		str	r2, [r3]
-  15:Core/Src/main.c ****             *(uint32_t*)(0x40020400UL + 0x18UL) = 0x80; 
- 125              		.loc 1 15 11
- 126 0078 F0E7     		b	.L4
- 127              	.L6:
- 128 007a 00BF     		.align	2
- 129              	.L5:
- 130 007c 30380240 		.word	1073887280
- 131 0080 00040240 		.word	1073873920
- 132 0084 04040240 		.word	1073873924
- 133 0088 08040240 		.word	1073873928
- 134 008c 0C040240 		.word	1073873932
- 135 0090 00080240 		.word	1073874944
- 136 0094 04080240 		.word	1073874948
- 137 0098 08080240 		.word	1073874952
- 138 009c 0C080240 		.word	1073874956
- 139 00a0 10080240 		.word	1073874960
- 140 00a4 18040240 		.word	1073873944
- 141              		.cfi_endproc
- 142              	.LFE0:
- 144              		.text
- 145              	.Letext0:
- 146              		.file 2 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/machine/_default_types.h
- 147              		.file 3 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/sys/_stdint.h"
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cczScKH2.s 			page 4
+  51              		.loc 1 8 13
+  52 0014 074B     		ldr	r3, .L5+4
+  53 0016 1B68     		ldr	r3, [r3]
+  54 0018 064A     		ldr	r2, .L5+4
+  55 001a 43F08003 		orr	r3, r3, #128
+  56 001e 1360     		str	r3, [r2]
+  57 0020 F2E7     		b	.L4
+  58              	.L2:
+   9:Core/Src/main.c ****         }
+  10:Core/Src/main.c ****         else{
+  11:Core/Src/main.c ****             SET_BIT(GPIOB_BSRR, GPIOB_BSRR_PIN7_RESET); 
+  59              		.loc 1 11 13
+  60 0022 044B     		ldr	r3, .L5+4
+  61 0024 1B68     		ldr	r3, [r3]
+  62 0026 034A     		ldr	r2, .L5+4
+  63 0028 43F40003 		orr	r3, r3, #8388608
+  64 002c 1360     		str	r3, [r2]
+   7:Core/Src/main.c ****             SET_BIT(GPIOB_BSRR, GPIOB_BSRR_PIN7_SET); 
+  65              		.loc 1 7 11
+  66 002e EBE7     		b	.L4
+  67              	.L6:
+  68              		.align	2
+  69              	.L5:
+  70 0030 10080240 		.word	1073874960
+  71 0034 18040240 		.word	1073873944
+  72              		.cfi_endproc
+  73              	.LFE0:
+  75              		.text
+  76              	.Letext0:
+  77              		.file 2 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/machine/_default_types.h
+  78              		.file 3 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/sys/_stdint.h"
+  79              		.file 4 "Core/Inc/init.h"
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\Arthur\AppData\Local\Temp\cczScKH2.s:21     .text.main:00000000 $t
-C:\Users\Arthur\AppData\Local\Temp\cczScKH2.s:27     .text.main:00000000 main
-C:\Users\Arthur\AppData\Local\Temp\cczScKH2.s:130    .text.main:0000007c $d
+C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s:21     .text.main:00000000 $t
+C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s:27     .text.main:00000000 main
+C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s:70     .text.main:00000030 $d
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+GPIO_Ini

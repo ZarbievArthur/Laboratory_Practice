@@ -1,0 +1,165 @@
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccLzN9zl.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"init.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/init.c"
+  20              		.section	.text.GPIO_Ini,"ax",%progbits
+  21              		.align	1
+  22              		.global	GPIO_Ini
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	GPIO_Ini:
+  28              	.LFB0:
+   1:Core/Src/init.c **** #include "init.h"
+   2:Core/Src/init.c **** 
+   3:Core/Src/init.c **** void GPIO_Ini(void){
+  29              		.loc 1 3 20
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34 0000 80B4     		push	{r7}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 4
+  37              		.cfi_offset 7, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_register 7
+   4:Core/Src/init.c ****     RCC_GPIO_EN |= RCC_GPIOB_EN + RCC_GPIOC_EN; //Power on B and C ports
+  41              		.loc 1 4 5
+  42 0004 184B     		ldr	r3, .L2
+  43 0006 1B68     		ldr	r3, [r3]
+  44 0008 174A     		ldr	r2, .L2
+  45              		.loc 1 4 17
+  46 000a 43F00603 		orr	r3, r3, #6
+  47 000e 1360     		str	r3, [r2]
+   5:Core/Src/init.c **** 
+   6:Core/Src/init.c ****     GPIOB_MODER     |= GPIOB_MODE_PIN7_OUT; // Output Mode 
+  48              		.loc 1 6 5
+  49 0010 164B     		ldr	r3, .L2+4
+  50 0012 1B68     		ldr	r3, [r3]
+  51 0014 154A     		ldr	r2, .L2+4
+  52              		.loc 1 6 21
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccLzN9zl.s 			page 2
+
+
+  53 0016 43F48043 		orr	r3, r3, #16384
+  54 001a 1360     		str	r3, [r2]
+   7:Core/Src/init.c ****     GPIOB_OTYPER    |=  GPIOB_OTYPE_PIN7_PP; // Push-pull register
+  55              		.loc 1 7 21
+  56 001c 144B     		ldr	r3, .L2+8
+  57              		.loc 1 7 5
+  58 001e 144A     		ldr	r2, .L2+8
+  59              		.loc 1 7 21
+  60 0020 1B68     		ldr	r3, [r3]
+  61 0022 1360     		str	r3, [r2]
+   8:Core/Src/init.c ****     GPIOB_OSPEEDR   |= GPIOB_OSPEED_PIN7_MID;  // Message's speed
+  62              		.loc 1 8 5
+  63 0024 134B     		ldr	r3, .L2+12
+  64 0026 1B68     		ldr	r3, [r3]
+  65 0028 124A     		ldr	r2, .L2+12
+  66              		.loc 1 8 21
+  67 002a 43F48043 		orr	r3, r3, #16384
+  68 002e 1360     		str	r3, [r2]
+   9:Core/Src/init.c ****     GPIOB_PUPDR     |= GPIOB_PUPDR_PIN7_NOPUPD; // No pull-up, pull-down
+  69              		.loc 1 9 21
+  70 0030 114B     		ldr	r3, .L2+16
+  71              		.loc 1 9 5
+  72 0032 114A     		ldr	r2, .L2+16
+  73              		.loc 1 9 21
+  74 0034 1B68     		ldr	r3, [r3]
+  75 0036 1360     		str	r3, [r2]
+  10:Core/Src/init.c ****  
+  11:Core/Src/init.c ****     GPIOC_MODER     |= GPIOC_MODE_PIN7_IN;   // Need setting Input/Output mode
+  76              		.loc 1 11 21
+  77 0038 104B     		ldr	r3, .L2+20
+  78              		.loc 1 11 5
+  79 003a 104A     		ldr	r2, .L2+20
+  80              		.loc 1 11 21
+  81 003c 1B68     		ldr	r3, [r3]
+  82 003e 1360     		str	r3, [r2]
+  12:Core/Src/init.c ****     GPIOC_OTYPER    |= GPIOC_OTYPE_PIN7_PP;  // push-pull register
+  83              		.loc 1 12 21
+  84 0040 0F4B     		ldr	r3, .L2+24
+  85              		.loc 1 12 5
+  86 0042 0F4A     		ldr	r2, .L2+24
+  87              		.loc 1 12 21
+  88 0044 1B68     		ldr	r3, [r3]
+  89 0046 1360     		str	r3, [r2]
+  13:Core/Src/init.c ****     GPIOC_OSPEEDR   |= GPIOC_OSPEED_PIN7_MID;    // Message's speed
+  90              		.loc 1 13 5
+  91 0048 0E4B     		ldr	r3, .L2+28
+  92 004a 1B68     		ldr	r3, [r3]
+  93 004c 0D4A     		ldr	r2, .L2+28
+  94              		.loc 1 13 21
+  95 004e 43F00063 		orr	r3, r3, #134217728
+  96 0052 1360     		str	r3, [r2]
+  14:Core/Src/init.c ****     GPIOC_PUPDR     |= GPIOC_PUPDR_PIN7_NOPUPD;    // Pull-up or pull-down
+  97              		.loc 1 14 21
+  98 0054 0C4B     		ldr	r3, .L2+32
+  99              		.loc 1 14 5
+ 100 0056 0C4A     		ldr	r2, .L2+32
+ 101              		.loc 1 14 21
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccLzN9zl.s 			page 3
+
+
+ 102 0058 1B68     		ldr	r3, [r3]
+ 103 005a 1360     		str	r3, [r2]
+  15:Core/Src/init.c **** }...
+ 104              		.loc 1 15 1
+ 105 005c 00BF     		nop
+ 106 005e BD46     		mov	sp, r7
+ 107              	.LCFI2:
+ 108              		.cfi_def_cfa_register 13
+ 109              		@ sp needed
+ 110 0060 5DF8047B 		ldr	r7, [sp], #4
+ 111              	.LCFI3:
+ 112              		.cfi_restore 7
+ 113              		.cfi_def_cfa_offset 0
+ 114 0064 7047     		bx	lr
+ 115              	.L3:
+ 116 0066 00BF     		.align	2
+ 117              	.L2:
+ 118 0068 30380240 		.word	1073887280
+ 119 006c 00040240 		.word	1073873920
+ 120 0070 04040240 		.word	1073873924
+ 121 0074 08040240 		.word	1073873928
+ 122 0078 0C040240 		.word	1073873932
+ 123 007c 00080240 		.word	1073874944
+ 124 0080 04080240 		.word	1073874948
+ 125 0084 08080240 		.word	1073874952
+ 126 0088 0C080240 		.word	1073874956
+ 127              		.cfi_endproc
+ 128              	.LFE0:
+ 130              		.text
+ 131              	.Letext0:
+ 132              		.file 2 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/machine/_default_types.h
+ 133              		.file 3 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/sys/_stdint.h"
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccLzN9zl.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 init.c
+C:\Users\Arthur\AppData\Local\Temp\ccLzN9zl.s:21     .text.GPIO_Ini:00000000 $t
+C:\Users\Arthur\AppData\Local\Temp\ccLzN9zl.s:27     .text.GPIO_Ini:00000000 GPIO_Ini
+C:\Users\Arthur\AppData\Local\Temp\ccLzN9zl.s:118    .text.GPIO_Ini:00000068 $d
+
+NO UNDEFINED SYMBOLS
