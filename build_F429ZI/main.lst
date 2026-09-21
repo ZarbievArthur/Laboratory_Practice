@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s 			page 1
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccYGdaE8.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -20,87 +20,107 @@ ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s 			page 1
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
   19              		.file 1 "Core/Src/main.c"
-  20              		.section	.text.main,"ax",%progbits
-  21              		.align	1
-  22              		.global	main
-  23              		.syntax unified
-  24              		.thumb
-  25              		.thumb_func
-  27              	main:
-  28              	.LFB0:
+  20              		.global	flag
+  21              		.section	.bss.flag,"aw",%nobits
+  24              	flag:
+  25 0000 00       		.space	1
+  26              		.section	.text.main,"ax",%progbits
+  27              		.align	1
+  28              		.global	main
+  29              		.syntax unified
+  30              		.thumb
+  31              		.thumb_func
+  33              	main:
+  34              	.LFB130:
    1:Core/Src/main.c **** #include "init.h"
    2:Core/Src/main.c **** 
-   3:Core/Src/main.c **** int main(void) {
-  29              		.loc 1 3 16
-  30              		.cfi_startproc
-  31              		@ args = 0, pretend = 0, frame = 0
-  32              		@ frame_needed = 1, uses_anonymous_args = 0
-  33 0000 80B5     		push	{r7, lr}
-  34              	.LCFI0:
-  35              		.cfi_def_cfa_offset 8
-  36              		.cfi_offset 7, -8
-  37              		.cfi_offset 14, -4
-  38 0002 00AF     		add	r7, sp, #0
-  39              	.LCFI1:
-  40              		.cfi_def_cfa_register 7
+   3:Core/Src/main.c **** uint8_t flag;
    4:Core/Src/main.c **** 
-   5:Core/Src/main.c ****     GPIO_Ini();
-  41              		.loc 1 5 5
-  42 0004 FFF7FEFF 		bl	GPIO_Ini
-  43              	.L4:
-   6:Core/Src/main.c ****     while(1){
-   7:Core/Src/main.c ****         if(READ_BIT(GPIOC_IDR, GPIOC_IDR_PIN13) != 0){
-  44              		.loc 1 7 12
-  45 0008 094B     		ldr	r3, .L5
-  46 000a 1B68     		ldr	r3, [r3]
-  47 000c 03F40053 		and	r3, r3, #8192
-  48              		.loc 1 7 11
-  49 0010 002B     		cmp	r3, #0
-  50 0012 06D0     		beq	.L2
-   8:Core/Src/main.c ****             SET_BIT(GPIOB_BSRR, GPIOB_BSRR_PIN7_SET); 
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s 			page 2
+   5:Core/Src/main.c **** int main(void) {
+  35              		.loc 1 5 16
+  36              		.cfi_startproc
+  37              		@ args = 0, pretend = 0, frame = 0
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
+  39 0000 80B5     		push	{r7, lr}
+  40              	.LCFI0:
+  41              		.cfi_def_cfa_offset 8
+  42              		.cfi_offset 7, -8
+  43              		.cfi_offset 14, -4
+  44 0002 00AF     		add	r7, sp, #0
+  45              	.LCFI1:
+  46              		.cfi_def_cfa_register 7
+   6:Core/Src/main.c **** 
+   7:Core/Src/main.c ****     GPIO_Ini();
+  47              		.loc 1 7 5
+  48 0004 FFF7FEFF 		bl	GPIO_Ini
+  49              	.L4:
+   8:Core/Src/main.c ****     while(1){
+   9:Core/Src/main.c ****         if(READ_BIT(GPIOC->IDR, GPIO_IDR_IDR_13) != 0){
+  50              		.loc 1 9 12
+  51 0008 0C4B     		ldr	r3, .L5
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccYGdaE8.s 			page 2
 
 
-  51              		.loc 1 8 13
-  52 0014 074B     		ldr	r3, .L5+4
-  53 0016 1B68     		ldr	r3, [r3]
-  54 0018 064A     		ldr	r2, .L5+4
-  55 001a 43F08003 		orr	r3, r3, #128
-  56 001e 1360     		str	r3, [r2]
-  57 0020 F2E7     		b	.L4
-  58              	.L2:
-   9:Core/Src/main.c ****         }
-  10:Core/Src/main.c ****         else{
-  11:Core/Src/main.c ****             SET_BIT(GPIOB_BSRR, GPIOB_BSRR_PIN7_RESET); 
-  59              		.loc 1 11 13
-  60 0022 044B     		ldr	r3, .L5+4
-  61 0024 1B68     		ldr	r3, [r3]
-  62 0026 034A     		ldr	r2, .L5+4
-  63 0028 43F40003 		orr	r3, r3, #8388608
-  64 002c 1360     		str	r3, [r2]
-   7:Core/Src/main.c ****             SET_BIT(GPIOB_BSRR, GPIOB_BSRR_PIN7_SET); 
-  65              		.loc 1 7 11
-  66 002e EBE7     		b	.L4
-  67              	.L6:
-  68              		.align	2
-  69              	.L5:
-  70 0030 10080240 		.word	1073874960
-  71 0034 18040240 		.word	1073873944
-  72              		.cfi_endproc
-  73              	.LFE0:
-  75              		.text
-  76              	.Letext0:
-  77              		.file 2 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/machine/_default_types.h
-  78              		.file 3 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/sys/_stdint.h"
-  79              		.file 4 "Core/Inc/init.h"
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s 			page 3
+  52 000a 1B69     		ldr	r3, [r3, #16]
+  53 000c 03F40053 		and	r3, r3, #8192
+  54              		.loc 1 9 11
+  55 0010 002B     		cmp	r3, #0
+  56 0012 09D0     		beq	.L2
+  10:Core/Src/main.c ****             flag = 1;
+  57              		.loc 1 10 18
+  58 0014 0A4B     		ldr	r3, .L5+4
+  59 0016 0122     		movs	r2, #1
+  60 0018 1A70     		strb	r2, [r3]
+  11:Core/Src/main.c ****             SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS7); 
+  61              		.loc 1 11 13
+  62 001a 0A4B     		ldr	r3, .L5+8
+  63 001c 9B69     		ldr	r3, [r3, #24]
+  64 001e 094A     		ldr	r2, .L5+8
+  65 0020 43F08003 		orr	r3, r3, #128
+  66 0024 9361     		str	r3, [r2, #24]
+  67 0026 EFE7     		b	.L4
+  68              	.L2:
+  12:Core/Src/main.c ****         }
+  13:Core/Src/main.c ****         else{
+  14:Core/Src/main.c ****             flag = 0;
+  69              		.loc 1 14 18
+  70 0028 054B     		ldr	r3, .L5+4
+  71 002a 0022     		movs	r2, #0
+  72 002c 1A70     		strb	r2, [r3]
+  15:Core/Src/main.c ****             SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR7); 
+  73              		.loc 1 15 13
+  74 002e 054B     		ldr	r3, .L5+8
+  75 0030 9B69     		ldr	r3, [r3, #24]
+  76 0032 044A     		ldr	r2, .L5+8
+  77 0034 43F40003 		orr	r3, r3, #8388608
+  78 0038 9361     		str	r3, [r2, #24]
+   9:Core/Src/main.c ****             flag = 1;
+  79              		.loc 1 9 11
+  80 003a E5E7     		b	.L4
+  81              	.L6:
+  82              		.align	2
+  83              	.L5:
+  84 003c 00080240 		.word	1073874944
+  85 0040 00000000 		.word	flag
+  86 0044 00040240 		.word	1073873920
+  87              		.cfi_endproc
+  88              	.LFE130:
+  90              		.text
+  91              	.Letext0:
+  92              		.file 2 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/machine/_default_types.h
+  93              		.file 3 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/sys/_stdint.h"
+  94              		.file 4 "CMSIS/Devices/STM32F4xx/Inc/STM32F429xx/stm32f429xx.h"
+  95              		.file 5 "Core/Inc/init.h"
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccYGdaE8.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s:21     .text.main:00000000 $t
-C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s:27     .text.main:00000000 main
-C:\Users\Arthur\AppData\Local\Temp\cc2PdDBI.s:70     .text.main:00000030 $d
+C:\Users\Arthur\AppData\Local\Temp\ccYGdaE8.s:24     .bss.flag:00000000 flag
+C:\Users\Arthur\AppData\Local\Temp\ccYGdaE8.s:25     .bss.flag:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccYGdaE8.s:27     .text.main:00000000 $t
+C:\Users\Arthur\AppData\Local\Temp\ccYGdaE8.s:33     .text.main:00000000 main
+C:\Users\Arthur\AppData\Local\Temp\ccYGdaE8.s:84     .text.main:0000003c $d
 
 UNDEFINED SYMBOLS
 GPIO_Ini
