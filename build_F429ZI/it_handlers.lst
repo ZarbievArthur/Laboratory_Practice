@@ -1,0 +1,207 @@
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"it_handlers.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/it_handlers.c"
+  20              		.global	BtnCount
+  21              		.section	.bss.BtnCount,"aw",%nobits
+  24              	BtnCount:
+  25 0000 00       		.space	1
+  26              		.section	.text.EXTI15_10_IRQHandler,"ax",%progbits
+  27              		.align	1
+  28              		.global	EXTI15_10_IRQHandler
+  29              		.syntax unified
+  30              		.thumb
+  31              		.thumb_func
+  33              	EXTI15_10_IRQHandler:
+  34              	.LFB130:
+   1:Core/Src/it_handlers.c **** // Здесь будут описаны все прерывания, которые мы опред
+   2:Core/Src/it_handlers.c **** #include "it_handlers.h"
+   3:Core/Src/it_handlers.c **** 
+   4:Core/Src/it_handlers.c **** // Исключение при нажатии кнопка
+   5:Core/Src/it_handlers.c **** extern uint8_t LedState;
+   6:Core/Src/it_handlers.c **** 
+   7:Core/Src/it_handlers.c **** uint8_t BtnCount = 0;
+   8:Core/Src/it_handlers.c **** 
+   9:Core/Src/it_handlers.c **** /**
+  10:Core/Src/it_handlers.c ****  * @brief Исключение при нажатии кнопки на PC13
+  11:Core/Src/it_handlers.c ****  */
+  12:Core/Src/it_handlers.c **** void EXTI15_10_IRQHandler(void){
+  35              		.loc 1 12 32
+  36              		.cfi_startproc
+  37              		@ args = 0, pretend = 0, frame = 0
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
+  39              		@ link register save eliminated.
+  40 0000 80B4     		push	{r7}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 4
+  43              		.cfi_offset 7, -4
+  44 0002 00AF     		add	r7, sp, #0
+  45              	.LCFI1:
+  46              		.cfi_def_cfa_register 7
+  13:Core/Src/it_handlers.c ****     BtnCount++;
+  47              		.loc 1 13 13
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s 			page 2
+
+
+  48 0004 104B     		ldr	r3, .L3
+  49 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  50 0008 0133     		adds	r3, r3, #1
+  51 000a DAB2     		uxtb	r2, r3
+  52 000c 0E4B     		ldr	r3, .L3
+  53 000e 1A70     		strb	r2, [r3]
+  14:Core/Src/it_handlers.c ****     if (BtnCount >= 1){
+  54              		.loc 1 14 18
+  55 0010 0D4B     		ldr	r3, .L3
+  56 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  57              		.loc 1 14 8
+  58 0014 002B     		cmp	r3, #0
+  59 0016 0CD0     		beq	.L2
+  15:Core/Src/it_handlers.c ****         LedState = !LedState;
+  60              		.loc 1 15 20
+  61 0018 0C4B     		ldr	r3, .L3+4
+  62 001a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  63 001c 002B     		cmp	r3, #0
+  64 001e 0CBF     		ite	eq
+  65 0020 0123     		moveq	r3, #1
+  66 0022 0023     		movne	r3, #0
+  67 0024 DBB2     		uxtb	r3, r3
+  68 0026 1A46     		mov	r2, r3
+  69              		.loc 1 15 18
+  70 0028 084B     		ldr	r3, .L3+4
+  71 002a 1A70     		strb	r2, [r3]
+  16:Core/Src/it_handlers.c ****         BtnCount = 0;
+  72              		.loc 1 16 18
+  73 002c 064B     		ldr	r3, .L3
+  74 002e 0022     		movs	r2, #0
+  75 0030 1A70     		strb	r2, [r3]
+  76              	.L2:
+  17:Core/Src/it_handlers.c ****     }
+  18:Core/Src/it_handlers.c ****     // Очишаем нужный бит регистра прерываний
+  19:Core/Src/it_handlers.c ****     SET_BIT(EXTI->PR, EXTI_PR_PR13);
+  77              		.loc 1 19 5
+  78 0032 074B     		ldr	r3, .L3+8
+  79 0034 5B69     		ldr	r3, [r3, #20]
+  80 0036 064A     		ldr	r2, .L3+8
+  81 0038 43F40053 		orr	r3, r3, #8192
+  82 003c 5361     		str	r3, [r2, #20]
+  20:Core/Src/it_handlers.c **** }
+  83              		.loc 1 20 1
+  84 003e 00BF     		nop
+  85 0040 BD46     		mov	sp, r7
+  86              	.LCFI2:
+  87              		.cfi_def_cfa_register 13
+  88              		@ sp needed
+  89 0042 5DF8047B 		ldr	r7, [sp], #4
+  90              	.LCFI3:
+  91              		.cfi_restore 7
+  92              		.cfi_def_cfa_offset 0
+  93 0046 7047     		bx	lr
+  94              	.L4:
+  95              		.align	2
+  96              	.L3:
+  97 0048 00000000 		.word	BtnCount
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s 			page 3
+
+
+  98 004c 00000000 		.word	LedState
+  99 0050 003C0140 		.word	1073822720
+ 100              		.cfi_endproc
+ 101              	.LFE130:
+ 103              		.section	.text.SysTick_Handler,"ax",%progbits
+ 104              		.align	1
+ 105              		.global	SysTick_Handler
+ 106              		.syntax unified
+ 107              		.thumb
+ 108              		.thumb_func
+ 110              	SysTick_Handler:
+ 111              	.LFB131:
+  21:Core/Src/it_handlers.c **** 
+  22:Core/Src/it_handlers.c **** 
+  23:Core/Src/it_handlers.c **** // Исключение при срабатывании таймера
+  24:Core/Src/it_handlers.c **** extern uint16_t GlobalTickCount;
+  25:Core/Src/it_handlers.c **** 
+  26:Core/Src/it_handlers.c **** /**
+  27:Core/Src/it_handlers.c ****  * @brief ИСключение при срабатывании таймера
+  28:Core/Src/it_handlers.c ****  */
+  29:Core/Src/it_handlers.c **** void SysTick_Handler(void){
+ 112              		.loc 1 29 27
+ 113              		.cfi_startproc
+ 114              		@ args = 0, pretend = 0, frame = 0
+ 115              		@ frame_needed = 1, uses_anonymous_args = 0
+ 116              		@ link register save eliminated.
+ 117 0000 80B4     		push	{r7}
+ 118              	.LCFI4:
+ 119              		.cfi_def_cfa_offset 4
+ 120              		.cfi_offset 7, -4
+ 121 0002 00AF     		add	r7, sp, #0
+ 122              	.LCFI5:
+ 123              		.cfi_def_cfa_register 7
+  30:Core/Src/it_handlers.c ****     GlobalTickCount++;
+ 124              		.loc 1 30 20
+ 125 0004 054B     		ldr	r3, .L6
+ 126 0006 1B88     		ldrh	r3, [r3]
+ 127 0008 0133     		adds	r3, r3, #1
+ 128 000a 9AB2     		uxth	r2, r3
+ 129 000c 034B     		ldr	r3, .L6
+ 130 000e 1A80     		strh	r2, [r3]	@ movhi
+  31:Core/Src/it_handlers.c **** }
+ 131              		.loc 1 31 1
+ 132 0010 00BF     		nop
+ 133 0012 BD46     		mov	sp, r7
+ 134              	.LCFI6:
+ 135              		.cfi_def_cfa_register 13
+ 136              		@ sp needed
+ 137 0014 5DF8047B 		ldr	r7, [sp], #4
+ 138              	.LCFI7:
+ 139              		.cfi_restore 7
+ 140              		.cfi_def_cfa_offset 0
+ 141 0018 7047     		bx	lr
+ 142              	.L7:
+ 143 001a 00BF     		.align	2
+ 144              	.L6:
+ 145 001c 00000000 		.word	GlobalTickCount
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s 			page 4
+
+
+ 146              		.cfi_endproc
+ 147              	.LFE131:
+ 149              		.text
+ 150              	.Letext0:
+ 151              		.file 2 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/machine/_default_types.h
+ 152              		.file 3 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/sys/_stdint.h"
+ 153              		.file 4 "CMSIS/Devices/STM32F4xx/Inc/STM32F429xx/stm32f429xx.h"
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 it_handlers.c
+C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s:24     .bss.BtnCount:00000000 BtnCount
+C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s:25     .bss.BtnCount:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s:27     .text.EXTI15_10_IRQHandler:00000000 $t
+C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s:33     .text.EXTI15_10_IRQHandler:00000000 EXTI15_10_IRQHandler
+C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s:97     .text.EXTI15_10_IRQHandler:00000048 $d
+C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s:104    .text.SysTick_Handler:00000000 $t
+C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s:110    .text.SysTick_Handler:00000000 SysTick_Handler
+C:\Users\Arthur\AppData\Local\Temp\ccXjD3mp.s:145    .text.SysTick_Handler:0000001c $d
+
+UNDEFINED SYMBOLS
+LedState
+GlobalTickCount
