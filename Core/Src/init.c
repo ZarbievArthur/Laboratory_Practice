@@ -104,32 +104,51 @@ void RCC_Init(void){
  /**
   * @brief Настройка тактирования периферии GPIO
   */
- void GPIO_Init(void){
-    SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN);
-    // Настраиваем пин на режим альтернативных функций
-    SET_BIT(GPIOC->MODER, GPIO_MODER_MODER9_1);
-    SET_BIT(GPIOB->MODER, GPIO_MODER_MODE7_0);
-    // Настраиваем пин на максимальную скорость работы
-    // от 42,5 МГц до 180 МГц
-    SET_BIT(GPIOC->OSPEEDR, GPIO_OSPEEDR_OSPEED9_Msk);
-    // Установка скорости светодиода
-    CLEAR_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDR_OSPEED7_Msk);
-    // Устанвливаем тип выхода - Push-Pull
-    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT7_Msk);
-    // Убираем подтягивающие резисторы
-    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD9_Msk);
-    // Выбираем тип альтернативной функции 
-    // Для настройки режима альтернативных функций существуют два регистра
-    // AFRL (от 0 до 7 пина) и ARFH (от 8 до 15 пина).
-    // Так как мы настраиваем 9-ый пин, то нам надо использовать AFRH. (Доп. информация находится в мануале на 288 странице)
-    // Так как переменная, за которую отвечает выбор регистров AFRH и AFRL, представлена в виде массива, то мы выбираем
-    // второй элемент массива (AFRH).
-    // Далее мы очищаем биты, которые настраивают альтернативную функцию для пина PC9.
-    // И последнее, что нам надо выбрать - это номер альтернативной функции.
-    // У одного пина может быть определено до 16 альтернативных функций, которые
-    // пронумерованы от 0 до 15. Альтернативная функция MCO2 имеет номер AF0, что
-    // соотвествует значению "0" в битах AFRH9
-    MODIFY_REG(GPIOC->AFR[1], GPIO_AFRH_AFSEL9_Msk, 0x0);
+void GPIO_Init(void){
+    // Включаем тактирование портов A, B, C
+    SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN);
+    
+    // Настраиваем светодиоды на выход
+    MODIFY_REG(GPIOC->MODER, GPIO_MODER_MODER6_Msk, GPIO_MODER_MODER6_0); // PC6
+    MODIFY_REG(GPIOC->MODER, GPIO_MODER_MODER7_Msk, GPIO_MODER_MODER7_0); // PC7
+    MODIFY_REG(GPIOB->MODER, GPIO_MODER_MODER5_Msk, GPIO_MODER_MODER5_0); // PB5
+    MODIFY_REG(GPIOB->MODER, GPIO_MODER_MODER3_Msk, GPIO_MODER_MODER3_0); // PB3
+    MODIFY_REG(GPIOA->MODER, GPIO_MODER_MODER4_Msk, GPIO_MODER_MODER4_0); // PA4
+    MODIFY_REG(GPIOB->MODER, GPIO_MODER_MODER4_Msk, GPIO_MODER_MODER4_0); // PB4
+    // Настраиваем кнопки на вход
+    CLEAR_BIT(GPIOB->MODER, GPIO_MODER_MODER15_Msk);                      // PB15
+    CLEAR_BIT(GPIOB->MODER, GPIO_MODER_MODER13_Msk);                      // PB13
+    CLEAR_BIT(GPIOB->MODER, GPIO_MODER_MODER12_Msk);                      // PB12
+ 
+    // Регистр OTYPER для светодиодов в Push-Pull
+    CLEAR_BIT(GPIOC->OTYPER, GPIO_OTYPER_OT6);
+    CLEAR_BIT(GPIOC->OTYPER, GPIO_OTYPER_OT7);
+    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT5);
+    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT3);
+    CLEAR_BIT(GPIOA->OTYPER, GPIO_OTYPER_OT4);
+    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT4);
+
+    // Настраиваем скорость работы каждого светодиода. Средняя скорость - 01
+    MODIFY_REG(GPIOC->OSPEEDR, GPIO_OSPEEDR_OSPEED6_Msk, GPIO_OSPEEDR_OSPEED6_0);
+    MODIFY_REG(GPIOC->OSPEEDR, GPIO_OSPEEDR_OSPEED7_Msk, GPIO_OSPEEDR_OSPEED7_0);
+    MODIFY_REG(GPIOB->OSPEEDR, GPIO_OSPEEDR_OSPEED5_Msk, GPIO_OSPEEDR_OSPEED5_0);
+    MODIFY_REG(GPIOB->OSPEEDR, GPIO_OSPEEDR_OSPEED3_Msk, GPIO_OSPEEDR_OSPEED3_0);
+    MODIFY_REG(GPIOA->OSPEEDR, GPIO_OSPEEDR_OSPEED4_Msk, GPIO_OSPEEDR_OSPEED4_0);
+    MODIFY_REG(GPIOB->OSPEEDR, GPIO_OSPEEDR_OSPEED4_Msk, GPIO_OSPEEDR_OSPEED4_0);
+
+
+    // Убираем подтягивающие резисторы как у светодиодов
+    // У кнопок ставим стягивающие  резисторы (Pull Down)
+    CLEAR_BIT(GPIOC->PUPDR, GPIO_PUPDR_PUPD6_Msk);
+    CLEAR_BIT(GPIOC->PUPDR, GPIO_PUPDR_PUPD7_Msk);
+    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD5_Msk);
+    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD3_Msk);
+    CLEAR_BIT(GPIOA->PUPDR, GPIO_PUPDR_PUPD4_Msk);
+    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD4_Msk);
+    //
+    MODIFY_REG(GPIOB->PUPDR, GPIO_PUPDR_PUPD15_Msk, GPIO_PUPDR_PUPD15_1);
+    MODIFY_REG(GPIOB->PUPDR, GPIO_PUPDR_PUPD13_Msk, GPIO_PUPDR_PUPD13_1);
+    MODIFY_REG(GPIOB->PUPDR, GPIO_PUPDR_PUPD12_Msk, GPIO_PUPDR_PUPD12_1);
  }
 
 /**
@@ -145,15 +164,20 @@ void ITR_Init(void){
     // Больше про этот регистр можно прочитать на странице 294 в мануале
     // а если кратенько, тот внутри каждого такого регистра можно настроить пин
     // одного номера для каждого порта. Короче, проще в мануале посмотреть
-    MODIFY_REG(SYSCFG->EXTICR[3], SYSCFG_EXTICR4_EXTI13_Msk, SYSCFG_EXTICR4_EXTI13_PC);
+    MODIFY_REG(SYSCFG->EXTICR[3], SYSCFG_EXTICR4_EXTI12_Msk | SYSCFG_EXTICR4_EXTI13_Msk | SYSCFG_EXTICR4_EXTI15_Msk, SYSCFG_EXTICR4_EXTI12_PB | SYSCFG_EXTICR4_EXTI13_PB | SYSCFG_EXTICR4_EXTI15_PB);
+ 
 
-
-    // Теперь можно настраивать регчссчччччччвычистры EXTI
-    // Сначала настраивается маскирование в регистре EXTI_IMR
+    // Теперь можно настраивать регистры EXTI
+    // Сначала настраивается маскирование в регистре EXTI_IMR для пинов 12, 13, 15
+    SET_BIT(EXTI->IMR, EXTI_IMR_MR12);
     SET_BIT(EXTI->IMR, EXTI_IMR_MR13);
-    // Затем настраиваем детектор фронта и спада
+    SET_BIT(EXTI->IMR, EXTI_IMR_MR15);
+    // Затем настраиваем детектор пока что только для фронта, потому что прерывание будет
+    // возникать только при нажатии на кнопку для нивелирования дребезга
+    SET_BIT(EXTI->RTSR, EXTI_RTSR_TR12);
     SET_BIT(EXTI->RTSR, EXTI_RTSR_TR13);
-    SET_BIT(EXTI->FTSR, EXTI_FTSR_TR13);
+    SET_BIT(EXTI->RTSR, EXTI_RTSR_TR15);
+    //SET_BIT(EXTI->FTSR, EXTI_FTSR_TR13);
 
 
     // После настройки внешнего контроллера прерываний
