@@ -4,13 +4,31 @@
 // Исключение при нажатии кнопка
 extern uint8_t LedState;            // Хранит состояние светодиода во втором режиме. Нужна для построения графиков
 extern uint32_t GlobalTickCount;    // Счетчик, который отвечает за включение и выключение светодиодов
-extern long FlickerFrequency;       // Частота мигания светодиода - задается в main.c
+extern long Flicker_Led1Frequency;       // Частота мигания светодиода - задается в main.c
+extern long Flicker_Led2Frequency;
+extern long Flicker_Led3Frequency;       // Частота мигания светодиода - задается в main.c
+extern long Flicker_Led4Frequency;
+extern long Flicker_Led5Frequency;       // Частота мигания светодиода - задается в main.c
+extern long Flicker_Led6Frequency;
+
 extern uint8_t Btn1_State;          // Состояние первой кнопки
 extern uint8_t Btn2_State;          // Состояние второй кнопки
 extern uint8_t Btn3_State;          // Состояние третьей кнопки
 
+extern uint8_t Led1_State;
+extern uint8_t Led2_State;
+extern uint8_t Led3_State;
+extern uint8_t Led4_State;
+extern uint8_t Led5_State;
+extern uint8_t Led6_State;
 
-uint32_t FlickerCount;              // Счетчик для включения и выключения светодиода
+uint32_t Flicker_Led1Count;              // Счетчик для включения и выключения 1-ого светодиода
+uint32_t Flicker_Led2Count;              // Счетчик для включения и выключения 2-ого светодиода
+uint32_t Flicker_Led3Count;              // Счетчик для включения и выключения 3-ого светодиода
+uint32_t Flicker_Led4Count;              // Счетчик для включения и выключения 4-ого светодиода
+uint32_t Flicker_Led5Count;              // Счетчик для включения и выключения 5-ого светодиода
+uint32_t Flicker_Led6Count;              // Счетчик для включения и выключения 6-ого светодиода
+
 /**
  * @brief Исключение при нажатии кнопки на PC13
  */
@@ -27,6 +45,7 @@ void EXTI15_10_IRQHandler(void)
             Btn3_State = 0;                 // Выбор светодиода будет всегда начинаться с первого светодиода
             ExternInterruptTickCount = 0; //Обнуление счётчика таймера 
             GlobalTickCount = 0; // Обнуляем счетчик времени светодиодов
+            
             // Выключаем все светодиоды    
             SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR6 | GPIO_BSRR_BR7);                    // Выключение диодов на порте С одной командой
             SET_BIT(GPIOA->BSRR, GPIO_BSRR_BR4);                                    // Выключение светодиодов на порте А одной командой
@@ -61,49 +80,118 @@ void EXTI15_10_IRQHandler(void)
  */
 void SysTick_Handler(void){
     GlobalTickCount++;
-    if (Btn1_State & (GlobalTickCount >= (Btn3_State * POWERON_PERIOD / 6))) FlickerCount++;
+    
+    // Реализуем счетчик для каждого светодиода
+    // Каждый счетчик будет производит нужное количество отсчетов для включения или выключения соответствующего светодиода
+    if (Btn1_State & (GlobalTickCount > 0)) Flicker_Led1Count++; // Иначе Flicker_Led1Count никогда не обнулится
     else {
-        FlickerCount = 0;
-        LedState = 0;
+        Flicker_Led1Count = 0;
+        Led1_State = 0;
     }
-    if ((FlickerCount > (Btn3_State * POWERON_PERIOD / 6)) & (FlickerCount  <= (FlickerFrequency + Btn3_State * POWERON_PERIOD / 6))){
-        if (Btn3_State == 0) {
-            SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS6);
-            if (GlobalTickCount > ((5 * POWERON_PERIOD / 6))) SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS4);
-        }
-        else if (Btn3_State == 1) {
-            SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS7);
-            SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS6);   //Дублирование включения светодиода нужно, чтобы не возникало проблемы выключенноого светодиода
-        }
-        else if (Btn3_State == 2) {
-            SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS5); 
-            SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS7);
-        }
-        else if (Btn3_State == 3) {
-            SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS3);
-            SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS5);
-        }
-        else if (Btn3_State == 4) {
-            SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BS4);
-            SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS3);
-        }
-        else {
-            SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS4);
-            SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BS4);
-        } 
-        LedState = 1;
+    if (Btn1_State & (GlobalTickCount >= (POWERON_PERIOD / 6))) Flicker_Led2Count++;
+    else {
+        Flicker_Led2Count = 0;
+        Led2_State = 0;
     }
-    else if ((FlickerCount > (Btn3_State * POWERON_PERIOD / 6)) & (FlickerCount <= (2 * FlickerFrequency + Btn3_State * POWERON_PERIOD / 6))){
-        if (Btn3_State == 0) SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
-        else if (Btn3_State == 1) SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
-        else if (Btn3_State == 2) SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5); 
-        else if (Btn3_State == 3) SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
-        else if (Btn3_State == 4) SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
-        else SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4); 
-        LedState = 0;
+    if (Btn1_State & (GlobalTickCount >= (2 * POWERON_PERIOD / 6))) Flicker_Led3Count++;
+    else {
+        Flicker_Led3Count = 0;
+        Led3_State = 0;
+    }
+    if (Btn1_State & (GlobalTickCount >= (3 * POWERON_PERIOD / 6))) Flicker_Led4Count++;
+    else {
+        Flicker_Led4Count = 0;
+        Led4_State = 0;
+    }
+    if (Btn1_State & (GlobalTickCount >= (4 * POWERON_PERIOD / 6))) Flicker_Led5Count++;
+    else {
+        Flicker_Led5Count = 0;
+        Led5_State = 0;
+    }
+    if (Btn1_State & (GlobalTickCount >= (5 * POWERON_PERIOD / 6))) Flicker_Led6Count++;
+    else {
+        Flicker_Led6Count = 0;
+        Led6_State = 0;
+    }
+
+    // А теперь настраиваем включение и выключение каждого светодиода
+    // PC6 - 1-ый светодиод
+    if ((Flicker_Led1Count > 0) & (Flicker_Led1Count < Flicker_Led1Frequency)) {
+        SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS6);
+        Led1_State = 1;
+    }
+    else if ((Flicker_Led1Count >= Flicker_Led1Frequency) & ((Flicker_Led1Count < 2 * Flicker_Led1Frequency))) {
+        SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
+        Led1_State = 0;
     }
     else {
-        FlickerCount = Btn3_State * POWERON_PERIOD / 6;
+        Flicker_Led1Count = 0;
+        Led1_State = 0;
+    }
+    // PC7 - 2-ой светодиод
+    if ((Flicker_Led2Count > 0) & (Flicker_Led2Count < Flicker_Led2Frequency)) {
+        SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS7);
+        Led2_State = 1;
+    }
+    else if ((Flicker_Led2Count >= Flicker_Led2Frequency) & ((Flicker_Led2Count < 2 * Flicker_Led2Frequency))) {
+        SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
+        Led2_State = 0;
+    }
+    else {
+        Flicker_Led2Count = 0;
+        Led2_State = 0;
+    }    
+    // PB5 - 3-ий светодиод
+    if ((Flicker_Led3Count > 0) & (Flicker_Led3Count < Flicker_Led3Frequency)) {
+        SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS5); 
+        Led3_State = 1;
+    }
+    else if ((Flicker_Led3Count >= Flicker_Led3Frequency) & ((Flicker_Led3Count < 2 * Flicker_Led3Frequency))) {
+        SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5); 
+        Led3_State = 0;
+    }
+    else {
+        Flicker_Led3Count = 0;
+        Led3_State = 0;
+    }
+    // PB3
+    if ((Flicker_Led4Count > 0) & (Flicker_Led4Count < Flicker_Led4Frequency)) {
+        SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS3); 
+        Led4_State = 1;
+    }
+    else if ((Flicker_Led4Count >= Flicker_Led4Frequency) & ((Flicker_Led4Count < 2 * Flicker_Led4Frequency))) {
+        SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3); 
+        Led4_State = 0;
+    }
+    else {
+        Flicker_Led4Count = 0;
+        Led4_State = 0;
+    }
+    //PA4
+    if ((Flicker_Led5Count > 0) & (Flicker_Led5Count < Flicker_Led5Frequency)) {
+        SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BS4);
+        Led5_State = 1;
+    }
+    else if ((Flicker_Led5Count >= Flicker_Led5Frequency) & ((Flicker_Led5Count < 2 * Flicker_Led5Frequency))) {
+        SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
+        Led5_State = 0;
+    }
+    else {
+        Flicker_Led5Count = 0;
+        Led5_State = 0;
+    }
+    // PB4
+    if ((Flicker_Led6Count > 0) & (Flicker_Led6Count < Flicker_Led6Frequency)) {
+        SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS4);
+        Led6_State = 1;
+    }
+    else if ((Flicker_Led6Count >= Flicker_Led6Frequency) & ((Flicker_Led6Count < 2 * Flicker_Led6Frequency))) {
+        SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
+        Led6_State = 0;
+    }
+    else {
+        Flicker_Led6Count = 0;
+        Led6_State = 0;
     }
     ExternInterruptTickCount++;
 

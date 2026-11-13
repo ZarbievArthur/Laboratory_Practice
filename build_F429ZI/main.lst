@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 1
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -45,30 +45,82 @@ ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 1
   52              		.section	.bss.PairLedState,"aw",%nobits
   55              	PairLedState:
   56 0000 00       		.space	1
-  57              		.global	FlickerFrequency
-  58              		.section	.data.FlickerFrequency,"aw"
-  59              		.align	2
-  62              	FlickerFrequency:
-  63 0000 050D0000 		.word	3333
-  64              		.section	.text.main,"ax",%progbits
-  65              		.align	1
-  66              		.global	main
-  67              		.syntax unified
-  68              		.thumb
-  69              		.thumb_func
-  71              	main:
-  72              	.LFB130:
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 2
+  57              		.global	Led1_State
+  58              		.section	.bss.Led1_State,"aw",%nobits
+  61              	Led1_State:
+  62 0000 00       		.space	1
+  63              		.global	Led2_State
+  64              		.section	.bss.Led2_State,"aw",%nobits
+  67              	Led2_State:
+  68 0000 00       		.space	1
+  69              		.global	Led3_State
+  70              		.section	.bss.Led3_State,"aw",%nobits
+  73              	Led3_State:
+  74 0000 00       		.space	1
+  75              		.global	Led4_State
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 2
 
 
+  76              		.section	.bss.Led4_State,"aw",%nobits
+  79              	Led4_State:
+  80 0000 00       		.space	1
+  81              		.global	Led5_State
+  82              		.section	.bss.Led5_State,"aw",%nobits
+  85              	Led5_State:
+  86 0000 00       		.space	1
+  87              		.global	Led6_State
+  88              		.section	.bss.Led6_State,"aw",%nobits
+  91              	Led6_State:
+  92 0000 00       		.space	1
+  93              		.global	Flicker_Led1Frequency
+  94              		.section	.data.Flicker_Led1Frequency,"aw"
+  95              		.align	2
+  98              	Flicker_Led1Frequency:
+  99 0000 CA020000 		.word	714
+ 100              		.global	Flicker_Led2Frequency
+ 101              		.section	.data.Flicker_Led2Frequency,"aw"
+ 102              		.align	2
+ 105              	Flicker_Led2Frequency:
+ 106 0000 CA020000 		.word	714
+ 107              		.global	Flicker_Led3Frequency
+ 108              		.section	.data.Flicker_Led3Frequency,"aw"
+ 109              		.align	2
+ 112              	Flicker_Led3Frequency:
+ 113 0000 CA020000 		.word	714
+ 114              		.global	Flicker_Led4Frequency
+ 115              		.section	.data.Flicker_Led4Frequency,"aw"
+ 116              		.align	2
+ 119              	Flicker_Led4Frequency:
+ 120 0000 CA020000 		.word	714
+ 121              		.global	Flicker_Led5Frequency
+ 122              		.section	.data.Flicker_Led5Frequency,"aw"
+ 123              		.align	2
+ 126              	Flicker_Led5Frequency:
+ 127 0000 CA020000 		.word	714
+ 128              		.global	Flicker_Led6Frequency
+ 129              		.section	.data.Flicker_Led6Frequency,"aw"
+ 130              		.align	2
+ 133              	Flicker_Led6Frequency:
+ 134 0000 CA020000 		.word	714
+ 135              		.section	.text.main,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	main
+ 138              		.syntax unified
+ 139              		.thumb
+ 140              		.thumb_func
+ 142              	main:
+ 143              	.LFB130:
    1:Core/Src/main.c **** #include "init.h"
    2:Core/Src/main.c **** #include "it_handlers.h"
-   3:Core/Src/main.c **** #define FREQUENCY_0_5_HZ_MS         1000 / 0.5
-   4:Core/Src/main.c **** #define FREQUENCY_1_7_HZ_MS         1000 / 1.7
-   5:Core/Src/main.c **** #define FREQUENCY_2_2_HZ_MS         1000 / 2.2
-   6:Core/Src/main.c **** #define FLICKER_PERIOD_0_3_HZ_MS    1000 / 0.3
-   7:Core/Src/main.c **** #define FLICKER_PERIOD_0_8_HZ_MS    1000 / 0.8
-   8:Core/Src/main.c **** #define FLICKER_PERIOD_1_4_HZ_MS    1000 / 1.4
+   3:Core/Src/main.c **** #define FREQUENCY_0_5_HZ_MS         1000 / 0.5  // 2000 мс      = 2 с
+   4:Core/Src/main.c **** #define FREQUENCY_1_7_HZ_MS         1000 / 1.7  // 588 мс       = 0,588 с
+   5:Core/Src/main.c **** #define FREQUENCY_2_2_HZ_MS         1000 / 2.2  // 454,55 мс    = 0,455 с
+   6:Core/Src/main.c **** #define FLICKER_PERIOD_0_3_HZ_MS    1000 / 0.3  // 3333 мс      = 3,3 c
+   7:Core/Src/main.c **** #define FLICKER_PERIOD_0_8_HZ_MS    1000 / 0.8  // 1250 мс      = 1,25 с
+   8:Core/Src/main.c **** #define FLICKER_PERIOD_1_4_HZ_MS    1000 / 1.4  // 714,29 мс    = 0,714 с
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 3
+
+
    9:Core/Src/main.c **** 
   10:Core/Src/main.c **** uint32_t GlobalTickCount;
   11:Core/Src/main.c **** uint8_t LedState = 0;
@@ -76,1098 +128,1401 @@ ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 1
   13:Core/Src/main.c **** uint8_t Btn2_State = 0;
   14:Core/Src/main.c **** uint8_t Btn3_State = 0;
   15:Core/Src/main.c **** uint8_t PairLedState = 0;
-  16:Core/Src/main.c **** long FlickerFrequency = FLICKER_PERIOD_0_3_HZ_MS;
-  17:Core/Src/main.c **** 
-  18:Core/Src/main.c **** int main(void) {
-  73              		.loc 1 18 16
-  74              		.cfi_startproc
-  75              		@ args = 0, pretend = 0, frame = 0
-  76              		@ frame_needed = 1, uses_anonymous_args = 0
-  77 0000 80B5     		push	{r7, lr}
-  78              	.LCFI0:
-  79              		.cfi_def_cfa_offset 8
-  80              		.cfi_offset 7, -8
-  81              		.cfi_offset 14, -4
-  82 0002 00AF     		add	r7, sp, #0
-  83              	.LCFI1:
-  84              		.cfi_def_cfa_register 7
-  19:Core/Src/main.c ****     GPIO_Init();
-  85              		.loc 1 19 5
-  86 0004 FFF7FEFF 		bl	GPIO_Init
-  20:Core/Src/main.c ****     RCC_Init();
-  87              		.loc 1 20 5
-  88 0008 FFF7FEFF 		bl	RCC_Init
-  21:Core/Src/main.c ****     ITR_Init();
-  89              		.loc 1 21 5
-  90 000c FFF7FEFF 		bl	ITR_Init
-  22:Core/Src/main.c ****     SysTick_Init();
-  91              		.loc 1 22 5
-  92 0010 FFF7FEFF 		bl	SysTick_Init
-  93              	.L28:
-  23:Core/Src/main.c **** 
-  24:Core/Src/main.c ****     while (1){
-  25:Core/Src/main.c ****         if (!Btn1_State){
-  94              		.loc 1 25 13
-  95 0014 974B     		ldr	r3, .L29
-  96 0016 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-  97              		.loc 1 25 12
-  98 0018 002B     		cmp	r3, #0
-  99 001a 40F01A82 		bne	.L2
-  26:Core/Src/main.c ****             
-  27:Core/Src/main.c ****             if (Btn2_State == 0){
- 100              		.loc 1 27 28
- 101 001e 964B     		ldr	r3, .L29+4
- 102 0020 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 3
+  16:Core/Src/main.c **** uint8_t Led1_State = 0;
+  17:Core/Src/main.c **** uint8_t Led2_State = 0;
+  18:Core/Src/main.c **** uint8_t Led3_State = 0;
+  19:Core/Src/main.c **** uint8_t Led4_State = 0;
+  20:Core/Src/main.c **** uint8_t Led5_State = 0;
+  21:Core/Src/main.c **** uint8_t Led6_State = 0;
+  22:Core/Src/main.c **** 
+  23:Core/Src/main.c **** long Flicker_Led1Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+  24:Core/Src/main.c **** long Flicker_Led2Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+  25:Core/Src/main.c **** long Flicker_Led3Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+  26:Core/Src/main.c **** long Flicker_Led4Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+  27:Core/Src/main.c **** long Flicker_Led5Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+  28:Core/Src/main.c **** long Flicker_Led6Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+  29:Core/Src/main.c **** 
+  30:Core/Src/main.c **** int main(void) {
+ 144              		.loc 1 30 16
+ 145              		.cfi_startproc
+ 146              		@ args = 0, pretend = 0, frame = 0
+ 147              		@ frame_needed = 1, uses_anonymous_args = 0
+ 148 0000 80B5     		push	{r7, lr}
+ 149              	.LCFI0:
+ 150              		.cfi_def_cfa_offset 8
+ 151              		.cfi_offset 7, -8
+ 152              		.cfi_offset 14, -4
+ 153 0002 00AF     		add	r7, sp, #0
+ 154              	.LCFI1:
+ 155              		.cfi_def_cfa_register 7
+  31:Core/Src/main.c ****     GPIO_Init();
+ 156              		.loc 1 31 5
+ 157 0004 FFF7FEFF 		bl	GPIO_Init
+  32:Core/Src/main.c ****     RCC_Init();
+ 158              		.loc 1 32 5
+ 159 0008 FFF7FEFF 		bl	RCC_Init
+  33:Core/Src/main.c ****     ITR_Init();
+ 160              		.loc 1 33 5
+ 161 000c FFF7FEFF 		bl	ITR_Init
+  34:Core/Src/main.c ****     SysTick_Init();
+ 162              		.loc 1 34 5
+ 163 0010 FFF7FEFF 		bl	SysTick_Init
+ 164              	.L43:
+  35:Core/Src/main.c **** 
+  36:Core/Src/main.c ****     while (1){
+  37:Core/Src/main.c ****         if (!Btn1_State){
+ 165              		.loc 1 37 13
+ 166 0014 934B     		ldr	r3, .L44
+ 167 0016 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 168              		.loc 1 37 12
+ 169 0018 002B     		cmp	r3, #0
+ 170 001a 40F03F82 		bne	.L2
+  38:Core/Src/main.c ****             Flicker_Led1Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 4
 
 
- 103              		.loc 1 27 16
- 104 0022 002B     		cmp	r3, #0
- 105 0024 40F0B580 		bne	.L3
-  28:Core/Src/main.c ****                 if (GlobalTickCount == 0){
- 106              		.loc 1 28 37
- 107 0028 944B     		ldr	r3, .L29+8
- 108 002a 1B68     		ldr	r3, [r3]
- 109              		.loc 1 28 20
- 110 002c 002B     		cmp	r3, #0
- 111 002e 24D1     		bne	.L4
-  29:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
- 112              		.loc 1 29 21
- 113 0030 934B     		ldr	r3, .L29+12
- 114 0032 9B69     		ldr	r3, [r3, #24]
- 115 0034 924A     		ldr	r2, .L29+12
- 116 0036 43F48003 		orr	r3, r3, #4194304
- 117 003a 9361     		str	r3, [r2, #24]
-  30:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
- 118              		.loc 1 30 21
- 119 003c 904B     		ldr	r3, .L29+12
- 120 003e 9B69     		ldr	r3, [r3, #24]
- 121 0040 8F4A     		ldr	r2, .L29+12
- 122 0042 43F40003 		orr	r3, r3, #8388608
- 123 0046 9361     		str	r3, [r2, #24]
-  31:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
- 124              		.loc 1 31 21
- 125 0048 8E4B     		ldr	r3, .L29+16
- 126 004a 9B69     		ldr	r3, [r3, #24]
- 127 004c 8D4A     		ldr	r2, .L29+16
- 128 004e 43F40013 		orr	r3, r3, #2097152
- 129 0052 9361     		str	r3, [r2, #24]
-  32:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
- 130              		.loc 1 32 21
- 131 0054 8B4B     		ldr	r3, .L29+16
- 132 0056 9B69     		ldr	r3, [r3, #24]
- 133 0058 8A4A     		ldr	r2, .L29+16
- 134 005a 43F40023 		orr	r3, r3, #524288
- 135 005e 9361     		str	r3, [r2, #24]
-  33:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
- 136              		.loc 1 33 21
- 137 0060 894B     		ldr	r3, .L29+20
- 138 0062 9B69     		ldr	r3, [r3, #24]
- 139 0064 884A     		ldr	r2, .L29+20
- 140 0066 43F48013 		orr	r3, r3, #1048576
- 141 006a 9361     		str	r3, [r2, #24]
-  34:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
- 142              		.loc 1 34 21
- 143 006c 854B     		ldr	r3, .L29+16
- 144 006e 9B69     		ldr	r3, [r3, #24]
- 145 0070 844A     		ldr	r2, .L29+16
- 146 0072 43F48013 		orr	r3, r3, #1048576
- 147 0076 9361     		str	r3, [r2, #24]
-  35:Core/Src/main.c ****                     continue;
- 148              		.loc 1 35 21
- 149 0078 A9E2     		b	.L5
- 150              	.L4:
-  36:Core/Src/main.c ****                 }
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 4
+ 171              		.loc 1 38 35
+ 172 001e 924B     		ldr	r3, .L44+4
+ 173 0020 40F2CA22 		movw	r2, #714
+ 174 0024 1A60     		str	r2, [r3]
+  39:Core/Src/main.c ****             Flicker_Led2Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 175              		.loc 1 39 35
+ 176 0026 914B     		ldr	r3, .L44+8
+ 177 0028 40F2CA22 		movw	r2, #714
+ 178 002c 1A60     		str	r2, [r3]
+  40:Core/Src/main.c ****             Flicker_Led3Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 179              		.loc 1 40 35
+ 180 002e 904B     		ldr	r3, .L44+12
+ 181 0030 40F2CA22 		movw	r2, #714
+ 182 0034 1A60     		str	r2, [r3]
+  41:Core/Src/main.c ****             Flicker_Led4Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 183              		.loc 1 41 35
+ 184 0036 8F4B     		ldr	r3, .L44+16
+ 185 0038 40F2CA22 		movw	r2, #714
+ 186 003c 1A60     		str	r2, [r3]
+  42:Core/Src/main.c ****             Flicker_Led5Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 187              		.loc 1 42 35
+ 188 003e 8E4B     		ldr	r3, .L44+20
+ 189 0040 40F2CA22 		movw	r2, #714
+ 190 0044 1A60     		str	r2, [r3]
+  43:Core/Src/main.c ****             Flicker_Led6Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 191              		.loc 1 43 35
+ 192 0046 8D4B     		ldr	r3, .L44+24
+ 193 0048 40F2CA22 		movw	r2, #714
+ 194 004c 1A60     		str	r2, [r3]
+  44:Core/Src/main.c ****             if (Btn2_State == 0){
+ 195              		.loc 1 44 28
+ 196 004e 8C4B     		ldr	r3, .L44+28
+ 197 0050 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 198              		.loc 1 44 16
+ 199 0052 002B     		cmp	r3, #0
+ 200 0054 40F0B580 		bne	.L3
+  45:Core/Src/main.c ****                 if (GlobalTickCount == 0){
+ 201              		.loc 1 45 37
+ 202 0058 8A4B     		ldr	r3, .L44+32
+ 203 005a 1B68     		ldr	r3, [r3]
+ 204              		.loc 1 45 20
+ 205 005c 002B     		cmp	r3, #0
+ 206 005e 24D1     		bne	.L4
+  46:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
+ 207              		.loc 1 46 21
+ 208 0060 894B     		ldr	r3, .L44+36
+ 209 0062 9B69     		ldr	r3, [r3, #24]
+ 210 0064 884A     		ldr	r2, .L44+36
+ 211 0066 43F48003 		orr	r3, r3, #4194304
+ 212 006a 9361     		str	r3, [r2, #24]
+  47:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
+ 213              		.loc 1 47 21
+ 214 006c 864B     		ldr	r3, .L44+36
+ 215 006e 9B69     		ldr	r3, [r3, #24]
+ 216 0070 854A     		ldr	r2, .L44+36
+ 217 0072 43F40003 		orr	r3, r3, #8388608
+ 218 0076 9361     		str	r3, [r2, #24]
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 5
 
 
-  37:Core/Src/main.c ****                 if ((GlobalTickCount > 0) & (GlobalTickCount <= FREQUENCY_0_5_HZ_MS)){
- 151              		.loc 1 37 43
- 152 007a 804B     		ldr	r3, .L29+8
- 153 007c 1B68     		ldr	r3, [r3]
- 154 007e 013B     		subs	r3, r3, #1
- 155              		.loc 1 37 20
- 156 0080 B3F5FA6F 		cmp	r3, #2000
- 157 0084 1BD2     		bcs	.L6
-  38:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR6);
- 158              		.loc 1 38 21
- 159 0086 7E4B     		ldr	r3, .L29+12
- 160 0088 9B69     		ldr	r3, [r3, #24]
- 161 008a 7D4A     		ldr	r2, .L29+12
- 162 008c 43F48003 		orr	r3, r3, #4194304
- 163 0090 9361     		str	r3, [r2, #24]
-  39:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR4);
- 164              		.loc 1 39 21
- 165 0092 7C4B     		ldr	r3, .L29+16
- 166 0094 9B69     		ldr	r3, [r3, #24]
- 167 0096 7B4A     		ldr	r2, .L29+16
- 168 0098 43F48013 		orr	r3, r3, #1048576
- 169 009c 9361     		str	r3, [r2, #24]
-  40:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS5);
- 170              		.loc 1 40 21
- 171 009e 794B     		ldr	r3, .L29+16
- 172 00a0 9B69     		ldr	r3, [r3, #24]
- 173 00a2 784A     		ldr	r2, .L29+16
- 174 00a4 43F02003 		orr	r3, r3, #32
- 175 00a8 9361     		str	r3, [r2, #24]
-  41:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS3);
- 176              		.loc 1 41 21
- 177 00aa 764B     		ldr	r3, .L29+16
- 178 00ac 9B69     		ldr	r3, [r3, #24]
- 179 00ae 754A     		ldr	r2, .L29+16
- 180 00b0 43F00803 		orr	r3, r3, #8
- 181 00b4 9361     		str	r3, [r2, #24]
-  42:Core/Src/main.c ****                     PairLedState = 0;
- 182              		.loc 1 42 34
- 183 00b6 754B     		ldr	r3, .L29+24
- 184 00b8 0022     		movs	r2, #0
- 185 00ba 1A70     		strb	r2, [r3]
- 186 00bc 69E0     		b	.L3
- 187              	.L6:
-  43:Core/Src/main.c ****                 }
-  44:Core/Src/main.c ****                 else if (GlobalTickCount <= 2 * FREQUENCY_0_5_HZ_MS){
- 188              		.loc 1 44 42
- 189 00be 6F4B     		ldr	r3, .L29+8
- 190 00c0 1B68     		ldr	r3, [r3]
- 191              		.loc 1 44 25
- 192 00c2 B3F57A6F 		cmp	r3, #4000
- 193 00c6 1BD8     		bhi	.L7
-  45:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);
- 194              		.loc 1 45 21
- 195 00c8 6E4B     		ldr	r3, .L29+16
- 196 00ca 9B69     		ldr	r3, [r3, #24]
- 197 00cc 6D4A     		ldr	r2, .L29+16
- 198 00ce 43F40013 		orr	r3, r3, #2097152
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 5
+  48:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
+ 219              		.loc 1 48 21
+ 220 0078 844B     		ldr	r3, .L44+40
+ 221 007a 9B69     		ldr	r3, [r3, #24]
+ 222 007c 834A     		ldr	r2, .L44+40
+ 223 007e 43F40013 		orr	r3, r3, #2097152
+ 224 0082 9361     		str	r3, [r2, #24]
+  49:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
+ 225              		.loc 1 49 21
+ 226 0084 814B     		ldr	r3, .L44+40
+ 227 0086 9B69     		ldr	r3, [r3, #24]
+ 228 0088 804A     		ldr	r2, .L44+40
+ 229 008a 43F40023 		orr	r3, r3, #524288
+ 230 008e 9361     		str	r3, [r2, #24]
+  50:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
+ 231              		.loc 1 50 21
+ 232 0090 7F4B     		ldr	r3, .L44+44
+ 233 0092 9B69     		ldr	r3, [r3, #24]
+ 234 0094 7E4A     		ldr	r2, .L44+44
+ 235 0096 43F48013 		orr	r3, r3, #1048576
+ 236 009a 9361     		str	r3, [r2, #24]
+  51:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
+ 237              		.loc 1 51 21
+ 238 009c 7B4B     		ldr	r3, .L44+40
+ 239 009e 9B69     		ldr	r3, [r3, #24]
+ 240 00a0 7A4A     		ldr	r2, .L44+40
+ 241 00a2 43F48013 		orr	r3, r3, #1048576
+ 242 00a6 9361     		str	r3, [r2, #24]
+  52:Core/Src/main.c ****                     continue;
+ 243              		.loc 1 52 21
+ 244 00a8 40E3     		b	.L5
+ 245              	.L4:
+  53:Core/Src/main.c ****                 }
+  54:Core/Src/main.c ****                 if ((GlobalTickCount > 0) & (GlobalTickCount <= FREQUENCY_0_5_HZ_MS)){
+ 246              		.loc 1 54 43
+ 247 00aa 764B     		ldr	r3, .L44+32
+ 248 00ac 1B68     		ldr	r3, [r3]
+ 249 00ae 013B     		subs	r3, r3, #1
+ 250              		.loc 1 54 20
+ 251 00b0 B3F5FA6F 		cmp	r3, #2000
+ 252 00b4 1BD2     		bcs	.L6
+  55:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR6);
+ 253              		.loc 1 55 21
+ 254 00b6 744B     		ldr	r3, .L44+36
+ 255 00b8 9B69     		ldr	r3, [r3, #24]
+ 256 00ba 734A     		ldr	r2, .L44+36
+ 257 00bc 43F48003 		orr	r3, r3, #4194304
+ 258 00c0 9361     		str	r3, [r2, #24]
+  56:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR4);
+ 259              		.loc 1 56 21
+ 260 00c2 724B     		ldr	r3, .L44+40
+ 261 00c4 9B69     		ldr	r3, [r3, #24]
+ 262 00c6 714A     		ldr	r2, .L44+40
+ 263 00c8 43F48013 		orr	r3, r3, #1048576
+ 264 00cc 9361     		str	r3, [r2, #24]
+  57:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS5);
+ 265              		.loc 1 57 21
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 6
 
 
- 199 00d2 9361     		str	r3, [r2, #24]
-  46:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR3);
- 200              		.loc 1 46 21
- 201 00d4 6B4B     		ldr	r3, .L29+16
- 202 00d6 9B69     		ldr	r3, [r3, #24]
- 203 00d8 6A4A     		ldr	r2, .L29+16
- 204 00da 43F40023 		orr	r3, r3, #524288
- 205 00de 9361     		str	r3, [r2, #24]
-  47:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS7);
- 206              		.loc 1 47 21
- 207 00e0 674B     		ldr	r3, .L29+12
- 208 00e2 9B69     		ldr	r3, [r3, #24]
- 209 00e4 664A     		ldr	r2, .L29+12
- 210 00e6 43F08003 		orr	r3, r3, #128
- 211 00ea 9361     		str	r3, [r2, #24]
-  48:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BS4);
- 212              		.loc 1 48 21
- 213 00ec 664B     		ldr	r3, .L29+20
- 214 00ee 9B69     		ldr	r3, [r3, #24]
- 215 00f0 654A     		ldr	r2, .L29+20
- 216 00f2 43F01003 		orr	r3, r3, #16
- 217 00f6 9361     		str	r3, [r2, #24]
-  49:Core/Src/main.c ****                     PairLedState = 1;
- 218              		.loc 1 49 34
- 219 00f8 644B     		ldr	r3, .L29+24
- 220 00fa 0122     		movs	r2, #1
- 221 00fc 1A70     		strb	r2, [r3]
- 222 00fe 48E0     		b	.L3
- 223              	.L7:
-  50:Core/Src/main.c **** 
-  51:Core/Src/main.c ****                 } 
-  52:Core/Src/main.c ****                 else if (GlobalTickCount <= 3 * FREQUENCY_0_5_HZ_MS) {
- 224              		.loc 1 52 42
- 225 0100 5E4B     		ldr	r3, .L29+8
- 226 0102 1B68     		ldr	r3, [r3]
- 227              		.loc 1 52 25
- 228 0104 41F27072 		movw	r2, #6000
- 229 0108 9342     		cmp	r3, r2
- 230 010a 1BD8     		bhi	.L8
-  53:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR7);
- 231              		.loc 1 53 21
- 232 010c 5C4B     		ldr	r3, .L29+12
- 233 010e 9B69     		ldr	r3, [r3, #24]
- 234 0110 5B4A     		ldr	r2, .L29+12
- 235 0112 43F40003 		orr	r3, r3, #8388608
- 236 0116 9361     		str	r3, [r2, #24]
-  54:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BR4);
- 237              		.loc 1 54 21
- 238 0118 5B4B     		ldr	r3, .L29+20
- 239 011a 9B69     		ldr	r3, [r3, #24]
- 240 011c 5A4A     		ldr	r2, .L29+20
- 241 011e 43F48013 		orr	r3, r3, #1048576
- 242 0122 9361     		str	r3, [r2, #24]
-  55:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS6);
- 243              		.loc 1 55 21
- 244 0124 564B     		ldr	r3, .L29+12
- 245 0126 9B69     		ldr	r3, [r3, #24]
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 6
+ 266 00ce 6F4B     		ldr	r3, .L44+40
+ 267 00d0 9B69     		ldr	r3, [r3, #24]
+ 268 00d2 6E4A     		ldr	r2, .L44+40
+ 269 00d4 43F02003 		orr	r3, r3, #32
+ 270 00d8 9361     		str	r3, [r2, #24]
+  58:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS3);
+ 271              		.loc 1 58 21
+ 272 00da 6C4B     		ldr	r3, .L44+40
+ 273 00dc 9B69     		ldr	r3, [r3, #24]
+ 274 00de 6B4A     		ldr	r2, .L44+40
+ 275 00e0 43F00803 		orr	r3, r3, #8
+ 276 00e4 9361     		str	r3, [r2, #24]
+  59:Core/Src/main.c ****                     PairLedState = 0;
+ 277              		.loc 1 59 34
+ 278 00e6 6B4B     		ldr	r3, .L44+48
+ 279 00e8 0022     		movs	r2, #0
+ 280 00ea 1A70     		strb	r2, [r3]
+ 281 00ec 69E0     		b	.L3
+ 282              	.L6:
+  60:Core/Src/main.c ****                 }
+  61:Core/Src/main.c ****                 else if (GlobalTickCount <= 2 * FREQUENCY_0_5_HZ_MS){
+ 283              		.loc 1 61 42
+ 284 00ee 654B     		ldr	r3, .L44+32
+ 285 00f0 1B68     		ldr	r3, [r3]
+ 286              		.loc 1 61 25
+ 287 00f2 B3F57A6F 		cmp	r3, #4000
+ 288 00f6 1BD8     		bhi	.L7
+  62:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);
+ 289              		.loc 1 62 21
+ 290 00f8 644B     		ldr	r3, .L44+40
+ 291 00fa 9B69     		ldr	r3, [r3, #24]
+ 292 00fc 634A     		ldr	r2, .L44+40
+ 293 00fe 43F40013 		orr	r3, r3, #2097152
+ 294 0102 9361     		str	r3, [r2, #24]
+  63:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR3);
+ 295              		.loc 1 63 21
+ 296 0104 614B     		ldr	r3, .L44+40
+ 297 0106 9B69     		ldr	r3, [r3, #24]
+ 298 0108 604A     		ldr	r2, .L44+40
+ 299 010a 43F40023 		orr	r3, r3, #524288
+ 300 010e 9361     		str	r3, [r2, #24]
+  64:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS7);
+ 301              		.loc 1 64 21
+ 302 0110 5D4B     		ldr	r3, .L44+36
+ 303 0112 9B69     		ldr	r3, [r3, #24]
+ 304 0114 5C4A     		ldr	r2, .L44+36
+ 305 0116 43F08003 		orr	r3, r3, #128
+ 306 011a 9361     		str	r3, [r2, #24]
+  65:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BS4);
+ 307              		.loc 1 65 21
+ 308 011c 5C4B     		ldr	r3, .L44+44
+ 309 011e 9B69     		ldr	r3, [r3, #24]
+ 310 0120 5B4A     		ldr	r2, .L44+44
+ 311 0122 43F01003 		orr	r3, r3, #16
+ 312 0126 9361     		str	r3, [r2, #24]
+  66:Core/Src/main.c ****                     PairLedState = 1;
+ 313              		.loc 1 66 34
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 7
 
 
- 246 0128 554A     		ldr	r2, .L29+12
- 247 012a 43F04003 		orr	r3, r3, #64
- 248 012e 9361     		str	r3, [r2, #24]
-  56:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS4);
- 249              		.loc 1 56 21
- 250 0130 544B     		ldr	r3, .L29+16
- 251 0132 9B69     		ldr	r3, [r3, #24]
- 252 0134 534A     		ldr	r2, .L29+16
- 253 0136 43F01003 		orr	r3, r3, #16
- 254 013a 9361     		str	r3, [r2, #24]
-  57:Core/Src/main.c ****                     PairLedState = 2;
- 255              		.loc 1 57 34
- 256 013c 534B     		ldr	r3, .L29+24
- 257 013e 0222     		movs	r2, #2
- 258 0140 1A70     		strb	r2, [r3]
- 259 0142 26E0     		b	.L3
- 260              	.L8:
-  58:Core/Src/main.c ****                 }
-  59:Core/Src/main.c ****                 else {
-  60:Core/Src/main.c ****                     GlobalTickCount = 0;
- 261              		.loc 1 60 37
- 262 0144 4D4B     		ldr	r3, .L29+8
- 263 0146 0022     		movs	r2, #0
- 264 0148 1A60     		str	r2, [r3]
-  61:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
- 265              		.loc 1 61 21
- 266 014a 4D4B     		ldr	r3, .L29+12
- 267 014c 9B69     		ldr	r3, [r3, #24]
- 268 014e 4C4A     		ldr	r2, .L29+12
- 269 0150 43F48003 		orr	r3, r3, #4194304
- 270 0154 9361     		str	r3, [r2, #24]
-  62:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
- 271              		.loc 1 62 21
- 272 0156 4A4B     		ldr	r3, .L29+12
- 273 0158 9B69     		ldr	r3, [r3, #24]
- 274 015a 494A     		ldr	r2, .L29+12
- 275 015c 43F40003 		orr	r3, r3, #8388608
- 276 0160 9361     		str	r3, [r2, #24]
-  63:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
- 277              		.loc 1 63 21
- 278 0162 484B     		ldr	r3, .L29+16
- 279 0164 9B69     		ldr	r3, [r3, #24]
- 280 0166 474A     		ldr	r2, .L29+16
- 281 0168 43F40013 		orr	r3, r3, #2097152
- 282 016c 9361     		str	r3, [r2, #24]
-  64:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
- 283              		.loc 1 64 21
- 284 016e 454B     		ldr	r3, .L29+16
- 285 0170 9B69     		ldr	r3, [r3, #24]
- 286 0172 444A     		ldr	r2, .L29+16
- 287 0174 43F40023 		orr	r3, r3, #524288
- 288 0178 9361     		str	r3, [r2, #24]
-  65:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
- 289              		.loc 1 65 21
- 290 017a 434B     		ldr	r3, .L29+20
- 291 017c 9B69     		ldr	r3, [r3, #24]
- 292 017e 424A     		ldr	r2, .L29+20
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 7
+ 314 0128 5A4B     		ldr	r3, .L44+48
+ 315 012a 0122     		movs	r2, #1
+ 316 012c 1A70     		strb	r2, [r3]
+ 317 012e 48E0     		b	.L3
+ 318              	.L7:
+  67:Core/Src/main.c **** 
+  68:Core/Src/main.c ****                 } 
+  69:Core/Src/main.c ****                 else if (GlobalTickCount <= 3 * FREQUENCY_0_5_HZ_MS) {
+ 319              		.loc 1 69 42
+ 320 0130 544B     		ldr	r3, .L44+32
+ 321 0132 1B68     		ldr	r3, [r3]
+ 322              		.loc 1 69 25
+ 323 0134 41F27072 		movw	r2, #6000
+ 324 0138 9342     		cmp	r3, r2
+ 325 013a 1BD8     		bhi	.L8
+  70:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR7);
+ 326              		.loc 1 70 21
+ 327 013c 524B     		ldr	r3, .L44+36
+ 328 013e 9B69     		ldr	r3, [r3, #24]
+ 329 0140 514A     		ldr	r2, .L44+36
+ 330 0142 43F40003 		orr	r3, r3, #8388608
+ 331 0146 9361     		str	r3, [r2, #24]
+  71:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BR4);
+ 332              		.loc 1 71 21
+ 333 0148 514B     		ldr	r3, .L44+44
+ 334 014a 9B69     		ldr	r3, [r3, #24]
+ 335 014c 504A     		ldr	r2, .L44+44
+ 336 014e 43F48013 		orr	r3, r3, #1048576
+ 337 0152 9361     		str	r3, [r2, #24]
+  72:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS6);
+ 338              		.loc 1 72 21
+ 339 0154 4C4B     		ldr	r3, .L44+36
+ 340 0156 9B69     		ldr	r3, [r3, #24]
+ 341 0158 4B4A     		ldr	r2, .L44+36
+ 342 015a 43F04003 		orr	r3, r3, #64
+ 343 015e 9361     		str	r3, [r2, #24]
+  73:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS4);
+ 344              		.loc 1 73 21
+ 345 0160 4A4B     		ldr	r3, .L44+40
+ 346 0162 9B69     		ldr	r3, [r3, #24]
+ 347 0164 494A     		ldr	r2, .L44+40
+ 348 0166 43F01003 		orr	r3, r3, #16
+ 349 016a 9361     		str	r3, [r2, #24]
+  74:Core/Src/main.c ****                     PairLedState = 2;
+ 350              		.loc 1 74 34
+ 351 016c 494B     		ldr	r3, .L44+48
+ 352 016e 0222     		movs	r2, #2
+ 353 0170 1A70     		strb	r2, [r3]
+ 354 0172 26E0     		b	.L3
+ 355              	.L8:
+  75:Core/Src/main.c ****                 }
+  76:Core/Src/main.c ****                 else {
+  77:Core/Src/main.c ****                     GlobalTickCount = 0;
+ 356              		.loc 1 77 37
+ 357 0174 434B     		ldr	r3, .L44+32
+ 358 0176 0022     		movs	r2, #0
+ 359 0178 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 8
 
 
- 293 0180 43F48013 		orr	r3, r3, #1048576
- 294 0184 9361     		str	r3, [r2, #24]
-  66:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
- 295              		.loc 1 66 21
- 296 0186 3F4B     		ldr	r3, .L29+16
- 297 0188 9B69     		ldr	r3, [r3, #24]
- 298 018a 3E4A     		ldr	r2, .L29+16
- 299 018c 43F48013 		orr	r3, r3, #1048576
- 300 0190 9361     		str	r3, [r2, #24]
- 301              	.L3:
-  67:Core/Src/main.c ****                 }
-  68:Core/Src/main.c ****             }
-  69:Core/Src/main.c ****             if (Btn2_State == 1){
- 302              		.loc 1 69 28
- 303 0192 394B     		ldr	r3, .L29+4
- 304 0194 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 305              		.loc 1 69 16
- 306 0196 012B     		cmp	r3, #1
- 307 0198 40F0C380 		bne	.L9
-  70:Core/Src/main.c ****                 if (GlobalTickCount == 0){
- 308              		.loc 1 70 37
- 309 019c 374B     		ldr	r3, .L29+8
- 310 019e 1B68     		ldr	r3, [r3]
- 311              		.loc 1 70 20
- 312 01a0 002B     		cmp	r3, #0
- 313 01a2 24D1     		bne	.L10
-  71:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
- 314              		.loc 1 71 21
- 315 01a4 364B     		ldr	r3, .L29+12
- 316 01a6 9B69     		ldr	r3, [r3, #24]
- 317 01a8 354A     		ldr	r2, .L29+12
- 318 01aa 43F48003 		orr	r3, r3, #4194304
- 319 01ae 9361     		str	r3, [r2, #24]
-  72:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
- 320              		.loc 1 72 21
- 321 01b0 334B     		ldr	r3, .L29+12
- 322 01b2 9B69     		ldr	r3, [r3, #24]
- 323 01b4 324A     		ldr	r2, .L29+12
- 324 01b6 43F40003 		orr	r3, r3, #8388608
- 325 01ba 9361     		str	r3, [r2, #24]
-  73:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
- 326              		.loc 1 73 21
- 327 01bc 314B     		ldr	r3, .L29+16
- 328 01be 9B69     		ldr	r3, [r3, #24]
- 329 01c0 304A     		ldr	r2, .L29+16
- 330 01c2 43F40013 		orr	r3, r3, #2097152
- 331 01c6 9361     		str	r3, [r2, #24]
-  74:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
- 332              		.loc 1 74 21
- 333 01c8 2E4B     		ldr	r3, .L29+16
- 334 01ca 9B69     		ldr	r3, [r3, #24]
- 335 01cc 2D4A     		ldr	r2, .L29+16
- 336 01ce 43F40023 		orr	r3, r3, #524288
- 337 01d2 9361     		str	r3, [r2, #24]
-  75:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
- 338              		.loc 1 75 21
- 339 01d4 2C4B     		ldr	r3, .L29+20
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 8
+  78:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
+ 360              		.loc 1 78 21
+ 361 017a 434B     		ldr	r3, .L44+36
+ 362 017c 9B69     		ldr	r3, [r3, #24]
+ 363 017e 424A     		ldr	r2, .L44+36
+ 364 0180 43F48003 		orr	r3, r3, #4194304
+ 365 0184 9361     		str	r3, [r2, #24]
+  79:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
+ 366              		.loc 1 79 21
+ 367 0186 404B     		ldr	r3, .L44+36
+ 368 0188 9B69     		ldr	r3, [r3, #24]
+ 369 018a 3F4A     		ldr	r2, .L44+36
+ 370 018c 43F40003 		orr	r3, r3, #8388608
+ 371 0190 9361     		str	r3, [r2, #24]
+  80:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
+ 372              		.loc 1 80 21
+ 373 0192 3E4B     		ldr	r3, .L44+40
+ 374 0194 9B69     		ldr	r3, [r3, #24]
+ 375 0196 3D4A     		ldr	r2, .L44+40
+ 376 0198 43F40013 		orr	r3, r3, #2097152
+ 377 019c 9361     		str	r3, [r2, #24]
+  81:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
+ 378              		.loc 1 81 21
+ 379 019e 3B4B     		ldr	r3, .L44+40
+ 380 01a0 9B69     		ldr	r3, [r3, #24]
+ 381 01a2 3A4A     		ldr	r2, .L44+40
+ 382 01a4 43F40023 		orr	r3, r3, #524288
+ 383 01a8 9361     		str	r3, [r2, #24]
+  82:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
+ 384              		.loc 1 82 21
+ 385 01aa 394B     		ldr	r3, .L44+44
+ 386 01ac 9B69     		ldr	r3, [r3, #24]
+ 387 01ae 384A     		ldr	r2, .L44+44
+ 388 01b0 43F48013 		orr	r3, r3, #1048576
+ 389 01b4 9361     		str	r3, [r2, #24]
+  83:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
+ 390              		.loc 1 83 21
+ 391 01b6 354B     		ldr	r3, .L44+40
+ 392 01b8 9B69     		ldr	r3, [r3, #24]
+ 393 01ba 344A     		ldr	r2, .L44+40
+ 394 01bc 43F48013 		orr	r3, r3, #1048576
+ 395 01c0 9361     		str	r3, [r2, #24]
+ 396              	.L3:
+  84:Core/Src/main.c ****                 }
+  85:Core/Src/main.c ****             }
+  86:Core/Src/main.c ****             if (Btn2_State == 1){
+ 397              		.loc 1 86 28
+ 398 01c2 2F4B     		ldr	r3, .L44+28
+ 399 01c4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 400              		.loc 1 86 16
+ 401 01c6 012B     		cmp	r3, #1
+ 402 01c8 40F0D080 		bne	.L9
+  87:Core/Src/main.c ****                 if (GlobalTickCount == 0){
+ 403              		.loc 1 87 37
+ 404 01cc 2D4B     		ldr	r3, .L44+32
+ 405 01ce 1B68     		ldr	r3, [r3]
+ 406              		.loc 1 87 20
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 9
 
 
- 340 01d6 9B69     		ldr	r3, [r3, #24]
- 341 01d8 2B4A     		ldr	r2, .L29+20
- 342 01da 43F48013 		orr	r3, r3, #1048576
- 343 01de 9361     		str	r3, [r2, #24]
-  76:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
- 344              		.loc 1 76 21
- 345 01e0 284B     		ldr	r3, .L29+16
- 346 01e2 9B69     		ldr	r3, [r3, #24]
- 347 01e4 274A     		ldr	r2, .L29+16
- 348 01e6 43F48013 		orr	r3, r3, #1048576
- 349 01ea 9361     		str	r3, [r2, #24]
-  77:Core/Src/main.c ****                     continue;
- 350              		.loc 1 77 21
- 351 01ec EFE1     		b	.L5
- 352              	.L10:
-  78:Core/Src/main.c ****                 }
-  79:Core/Src/main.c ****                 if ((GlobalTickCount > 0) & (GlobalTickCount <= FREQUENCY_1_7_HZ_MS)){
- 353              		.loc 1 79 43
- 354 01ee 234B     		ldr	r3, .L29+8
- 355 01f0 1B68     		ldr	r3, [r3]
- 356 01f2 013B     		subs	r3, r3, #1
- 357              		.loc 1 79 20
- 358 01f4 B3F5137F 		cmp	r3, #588
- 359 01f8 1BD2     		bcs	.L11
-  80:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR6);
- 360              		.loc 1 80 21
- 361 01fa 214B     		ldr	r3, .L29+12
- 362 01fc 9B69     		ldr	r3, [r3, #24]
- 363 01fe 204A     		ldr	r2, .L29+12
- 364 0200 43F48003 		orr	r3, r3, #4194304
- 365 0204 9361     		str	r3, [r2, #24]
-  81:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR4);
- 366              		.loc 1 81 21
- 367 0206 1F4B     		ldr	r3, .L29+16
- 368 0208 9B69     		ldr	r3, [r3, #24]
- 369 020a 1E4A     		ldr	r2, .L29+16
- 370 020c 43F48013 		orr	r3, r3, #1048576
- 371 0210 9361     		str	r3, [r2, #24]
-  82:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS5);
- 372              		.loc 1 82 21
- 373 0212 1C4B     		ldr	r3, .L29+16
- 374 0214 9B69     		ldr	r3, [r3, #24]
- 375 0216 1B4A     		ldr	r2, .L29+16
- 376 0218 43F02003 		orr	r3, r3, #32
- 377 021c 9361     		str	r3, [r2, #24]
-  83:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS3);
- 378              		.loc 1 83 21
- 379 021e 194B     		ldr	r3, .L29+16
- 380 0220 9B69     		ldr	r3, [r3, #24]
- 381 0222 184A     		ldr	r2, .L29+16
- 382 0224 43F00803 		orr	r3, r3, #8
- 383 0228 9361     		str	r3, [r2, #24]
-  84:Core/Src/main.c ****                     PairLedState = 0;
- 384              		.loc 1 84 34
- 385 022a 184B     		ldr	r3, .L29+24
- 386 022c 0022     		movs	r2, #0
- 387 022e 1A70     		strb	r2, [r3]
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 9
+ 407 01d0 002B     		cmp	r3, #0
+ 408 01d2 24D1     		bne	.L10
+  88:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
+ 409              		.loc 1 88 21
+ 410 01d4 2C4B     		ldr	r3, .L44+36
+ 411 01d6 9B69     		ldr	r3, [r3, #24]
+ 412 01d8 2B4A     		ldr	r2, .L44+36
+ 413 01da 43F48003 		orr	r3, r3, #4194304
+ 414 01de 9361     		str	r3, [r2, #24]
+  89:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
+ 415              		.loc 1 89 21
+ 416 01e0 294B     		ldr	r3, .L44+36
+ 417 01e2 9B69     		ldr	r3, [r3, #24]
+ 418 01e4 284A     		ldr	r2, .L44+36
+ 419 01e6 43F40003 		orr	r3, r3, #8388608
+ 420 01ea 9361     		str	r3, [r2, #24]
+  90:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
+ 421              		.loc 1 90 21
+ 422 01ec 274B     		ldr	r3, .L44+40
+ 423 01ee 9B69     		ldr	r3, [r3, #24]
+ 424 01f0 264A     		ldr	r2, .L44+40
+ 425 01f2 43F40013 		orr	r3, r3, #2097152
+ 426 01f6 9361     		str	r3, [r2, #24]
+  91:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
+ 427              		.loc 1 91 21
+ 428 01f8 244B     		ldr	r3, .L44+40
+ 429 01fa 9B69     		ldr	r3, [r3, #24]
+ 430 01fc 234A     		ldr	r2, .L44+40
+ 431 01fe 43F40023 		orr	r3, r3, #524288
+ 432 0202 9361     		str	r3, [r2, #24]
+  92:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
+ 433              		.loc 1 92 21
+ 434 0204 224B     		ldr	r3, .L44+44
+ 435 0206 9B69     		ldr	r3, [r3, #24]
+ 436 0208 214A     		ldr	r2, .L44+44
+ 437 020a 43F48013 		orr	r3, r3, #1048576
+ 438 020e 9361     		str	r3, [r2, #24]
+  93:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
+ 439              		.loc 1 93 21
+ 440 0210 1E4B     		ldr	r3, .L44+40
+ 441 0212 9B69     		ldr	r3, [r3, #24]
+ 442 0214 1D4A     		ldr	r2, .L44+40
+ 443 0216 43F48013 		orr	r3, r3, #1048576
+ 444 021a 9361     		str	r3, [r2, #24]
+  94:Core/Src/main.c ****                     continue;
+ 445              		.loc 1 94 21
+ 446 021c 86E2     		b	.L5
+ 447              	.L10:
+  95:Core/Src/main.c ****                 }
+  96:Core/Src/main.c ****                 if ((GlobalTickCount > 0) & (GlobalTickCount <= FREQUENCY_1_7_HZ_MS)){
+ 448              		.loc 1 96 43
+ 449 021e 194B     		ldr	r3, .L44+32
+ 450 0220 1B68     		ldr	r3, [r3]
+ 451 0222 013B     		subs	r3, r3, #1
+ 452              		.loc 1 96 20
+ 453 0224 B3F5137F 		cmp	r3, #588
+ 454 0228 36D2     		bcs	.L11
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 10
 
 
- 388 0230 77E0     		b	.L9
- 389              	.L11:
-  85:Core/Src/main.c ****                 }
-  86:Core/Src/main.c ****                 else if (GlobalTickCount <= 2 * FREQUENCY_1_7_HZ_MS){
- 390              		.loc 1 86 42
- 391 0232 124B     		ldr	r3, .L29+8
- 392 0234 1B68     		ldr	r3, [r3]
- 393              		.loc 1 86 25
- 394 0236 B3F5936F 		cmp	r3, #1176
- 395 023a 29D8     		bhi	.L12
-  87:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);
- 396              		.loc 1 87 21
- 397 023c 114B     		ldr	r3, .L29+16
- 398 023e 9B69     		ldr	r3, [r3, #24]
- 399 0240 104A     		ldr	r2, .L29+16
- 400 0242 43F40013 		orr	r3, r3, #2097152
- 401 0246 9361     		str	r3, [r2, #24]
-  88:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR3);
- 402              		.loc 1 88 21
- 403 0248 0E4B     		ldr	r3, .L29+16
- 404 024a 9B69     		ldr	r3, [r3, #24]
- 405 024c 0D4A     		ldr	r2, .L29+16
- 406 024e 43F40023 		orr	r3, r3, #524288
- 407 0252 9361     		str	r3, [r2, #24]
-  89:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS7);
- 408              		.loc 1 89 21
- 409 0254 0A4B     		ldr	r3, .L29+12
- 410 0256 9B69     		ldr	r3, [r3, #24]
- 411 0258 094A     		ldr	r2, .L29+12
- 412 025a 43F08003 		orr	r3, r3, #128
- 413 025e 9361     		str	r3, [r2, #24]
-  90:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BS4);
- 414              		.loc 1 90 21
- 415 0260 094B     		ldr	r3, .L29+20
- 416 0262 9B69     		ldr	r3, [r3, #24]
- 417 0264 084A     		ldr	r2, .L29+20
- 418 0266 43F01003 		orr	r3, r3, #16
- 419 026a 9361     		str	r3, [r2, #24]
-  91:Core/Src/main.c ****                     PairLedState = 1;
- 420              		.loc 1 91 34
- 421 026c 074B     		ldr	r3, .L29+24
- 422 026e 0122     		movs	r2, #1
- 423 0270 1A70     		strb	r2, [r3]
- 424 0272 56E0     		b	.L9
- 425              	.L30:
- 426              		.align	2
- 427              	.L29:
- 428 0274 00000000 		.word	Btn1_State
- 429 0278 00000000 		.word	Btn2_State
- 430 027c 00000000 		.word	GlobalTickCount
- 431 0280 00080240 		.word	1073874944
- 432 0284 00040240 		.word	1073873920
- 433 0288 00000240 		.word	1073872896
- 434 028c 00000000 		.word	PairLedState
- 435              	.L12:
-  92:Core/Src/main.c ****                 } 
-  93:Core/Src/main.c ****                 else if (GlobalTickCount <= 3 * FREQUENCY_1_7_HZ_MS) {
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 10
+  97:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR6);
+ 455              		.loc 1 97 21
+ 456 022a 174B     		ldr	r3, .L44+36
+ 457 022c 9B69     		ldr	r3, [r3, #24]
+ 458 022e 164A     		ldr	r2, .L44+36
+ 459 0230 43F48003 		orr	r3, r3, #4194304
+ 460 0234 9361     		str	r3, [r2, #24]
+  98:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR4);
+ 461              		.loc 1 98 21
+ 462 0236 154B     		ldr	r3, .L44+40
+ 463 0238 9B69     		ldr	r3, [r3, #24]
+ 464 023a 144A     		ldr	r2, .L44+40
+ 465 023c 43F48013 		orr	r3, r3, #1048576
+ 466 0240 9361     		str	r3, [r2, #24]
+  99:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS5);
+ 467              		.loc 1 99 21
+ 468 0242 124B     		ldr	r3, .L44+40
+ 469 0244 9B69     		ldr	r3, [r3, #24]
+ 470 0246 114A     		ldr	r2, .L44+40
+ 471 0248 43F02003 		orr	r3, r3, #32
+ 472 024c 9361     		str	r3, [r2, #24]
+ 100:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS3);
+ 473              		.loc 1 100 21
+ 474 024e 0F4B     		ldr	r3, .L44+40
+ 475 0250 9B69     		ldr	r3, [r3, #24]
+ 476 0252 0E4A     		ldr	r2, .L44+40
+ 477 0254 43F00803 		orr	r3, r3, #8
+ 478 0258 9361     		str	r3, [r2, #24]
+ 101:Core/Src/main.c ****                     PairLedState = 0;
+ 479              		.loc 1 101 34
+ 480 025a 0E4B     		ldr	r3, .L44+48
+ 481 025c 0022     		movs	r2, #0
+ 482 025e 1A70     		strb	r2, [r3]
+ 483 0260 84E0     		b	.L9
+ 484              	.L45:
+ 485 0262 00BF     		.align	2
+ 486              	.L44:
+ 487 0264 00000000 		.word	Btn1_State
+ 488 0268 00000000 		.word	Flicker_Led1Frequency
+ 489 026c 00000000 		.word	Flicker_Led2Frequency
+ 490 0270 00000000 		.word	Flicker_Led3Frequency
+ 491 0274 00000000 		.word	Flicker_Led4Frequency
+ 492 0278 00000000 		.word	Flicker_Led5Frequency
+ 493 027c 00000000 		.word	Flicker_Led6Frequency
+ 494 0280 00000000 		.word	Btn2_State
+ 495 0284 00000000 		.word	GlobalTickCount
+ 496 0288 00080240 		.word	1073874944
+ 497 028c 00040240 		.word	1073873920
+ 498 0290 00000240 		.word	1073872896
+ 499 0294 00000000 		.word	PairLedState
+ 500              	.L11:
+ 102:Core/Src/main.c ****                 }
+ 103:Core/Src/main.c ****                 else if (GlobalTickCount <= 2 * FREQUENCY_1_7_HZ_MS){
+ 501              		.loc 1 103 42
+ 502 0298 954B     		ldr	r3, .L46
+ 503 029a 1B68     		ldr	r3, [r3]
+ 504              		.loc 1 103 25
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 11
 
 
- 436              		.loc 1 93 42
- 437 0290 8D4B     		ldr	r3, .L31
- 438 0292 1B68     		ldr	r3, [r3]
- 439              		.loc 1 93 25
- 440 0294 40F2E462 		movw	r2, #1764
- 441 0298 9342     		cmp	r3, r2
- 442 029a 1BD8     		bhi	.L13
-  94:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR7);
- 443              		.loc 1 94 21
- 444 029c 8B4B     		ldr	r3, .L31+4
- 445 029e 9B69     		ldr	r3, [r3, #24]
- 446 02a0 8A4A     		ldr	r2, .L31+4
- 447 02a2 43F40003 		orr	r3, r3, #8388608
- 448 02a6 9361     		str	r3, [r2, #24]
-  95:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BR4);
- 449              		.loc 1 95 21
- 450 02a8 894B     		ldr	r3, .L31+8
- 451 02aa 9B69     		ldr	r3, [r3, #24]
- 452 02ac 884A     		ldr	r2, .L31+8
- 453 02ae 43F48013 		orr	r3, r3, #1048576
- 454 02b2 9361     		str	r3, [r2, #24]
-  96:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS6);
- 455              		.loc 1 96 21
- 456 02b4 854B     		ldr	r3, .L31+4
- 457 02b6 9B69     		ldr	r3, [r3, #24]
- 458 02b8 844A     		ldr	r2, .L31+4
- 459 02ba 43F04003 		orr	r3, r3, #64
- 460 02be 9361     		str	r3, [r2, #24]
-  97:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS4);
- 461              		.loc 1 97 21
- 462 02c0 844B     		ldr	r3, .L31+12
- 463 02c2 9B69     		ldr	r3, [r3, #24]
- 464 02c4 834A     		ldr	r2, .L31+12
- 465 02c6 43F01003 		orr	r3, r3, #16
- 466 02ca 9361     		str	r3, [r2, #24]
-  98:Core/Src/main.c ****                     PairLedState = 2;
- 467              		.loc 1 98 34
- 468 02cc 824B     		ldr	r3, .L31+16
- 469 02ce 0222     		movs	r2, #2
- 470 02d0 1A70     		strb	r2, [r3]
- 471 02d2 26E0     		b	.L9
- 472              	.L13:
-  99:Core/Src/main.c ****                 }
- 100:Core/Src/main.c ****                 else {
- 101:Core/Src/main.c ****                     GlobalTickCount = 0;
- 473              		.loc 1 101 37
- 474 02d4 7C4B     		ldr	r3, .L31
- 475 02d6 0022     		movs	r2, #0
- 476 02d8 1A60     		str	r2, [r3]
- 102:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
- 477              		.loc 1 102 21
- 478 02da 7C4B     		ldr	r3, .L31+4
- 479 02dc 9B69     		ldr	r3, [r3, #24]
- 480 02de 7B4A     		ldr	r2, .L31+4
- 481 02e0 43F48003 		orr	r3, r3, #4194304
- 482 02e4 9361     		str	r3, [r2, #24]
- 103:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 11
+ 505 029c B3F5936F 		cmp	r3, #1176
+ 506 02a0 1BD8     		bhi	.L12
+ 104:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);
+ 507              		.loc 1 104 21
+ 508 02a2 944B     		ldr	r3, .L46+4
+ 509 02a4 9B69     		ldr	r3, [r3, #24]
+ 510 02a6 934A     		ldr	r2, .L46+4
+ 511 02a8 43F40013 		orr	r3, r3, #2097152
+ 512 02ac 9361     		str	r3, [r2, #24]
+ 105:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR3);
+ 513              		.loc 1 105 21
+ 514 02ae 914B     		ldr	r3, .L46+4
+ 515 02b0 9B69     		ldr	r3, [r3, #24]
+ 516 02b2 904A     		ldr	r2, .L46+4
+ 517 02b4 43F40023 		orr	r3, r3, #524288
+ 518 02b8 9361     		str	r3, [r2, #24]
+ 106:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS7);
+ 519              		.loc 1 106 21
+ 520 02ba 8F4B     		ldr	r3, .L46+8
+ 521 02bc 9B69     		ldr	r3, [r3, #24]
+ 522 02be 8E4A     		ldr	r2, .L46+8
+ 523 02c0 43F08003 		orr	r3, r3, #128
+ 524 02c4 9361     		str	r3, [r2, #24]
+ 107:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BS4);
+ 525              		.loc 1 107 21
+ 526 02c6 8D4B     		ldr	r3, .L46+12
+ 527 02c8 9B69     		ldr	r3, [r3, #24]
+ 528 02ca 8C4A     		ldr	r2, .L46+12
+ 529 02cc 43F01003 		orr	r3, r3, #16
+ 530 02d0 9361     		str	r3, [r2, #24]
+ 108:Core/Src/main.c ****                     PairLedState = 1;
+ 531              		.loc 1 108 34
+ 532 02d2 8B4B     		ldr	r3, .L46+16
+ 533 02d4 0122     		movs	r2, #1
+ 534 02d6 1A70     		strb	r2, [r3]
+ 535 02d8 48E0     		b	.L9
+ 536              	.L12:
+ 109:Core/Src/main.c ****                 } 
+ 110:Core/Src/main.c ****                 else if (GlobalTickCount <= 3 * FREQUENCY_1_7_HZ_MS) {
+ 537              		.loc 1 110 42
+ 538 02da 854B     		ldr	r3, .L46
+ 539 02dc 1B68     		ldr	r3, [r3]
+ 540              		.loc 1 110 25
+ 541 02de 40F2E462 		movw	r2, #1764
+ 542 02e2 9342     		cmp	r3, r2
+ 543 02e4 1BD8     		bhi	.L13
+ 111:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR7);
+ 544              		.loc 1 111 21
+ 545 02e6 844B     		ldr	r3, .L46+8
+ 546 02e8 9B69     		ldr	r3, [r3, #24]
+ 547 02ea 834A     		ldr	r2, .L46+8
+ 548 02ec 43F40003 		orr	r3, r3, #8388608
+ 549 02f0 9361     		str	r3, [r2, #24]
+ 112:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BR4);
+ 550              		.loc 1 112 21
+ 551 02f2 824B     		ldr	r3, .L46+12
+ 552 02f4 9B69     		ldr	r3, [r3, #24]
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 12
 
 
- 483              		.loc 1 103 21
- 484 02e6 794B     		ldr	r3, .L31+4
- 485 02e8 9B69     		ldr	r3, [r3, #24]
- 486 02ea 784A     		ldr	r2, .L31+4
- 487 02ec 43F40003 		orr	r3, r3, #8388608
- 488 02f0 9361     		str	r3, [r2, #24]
- 104:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
- 489              		.loc 1 104 21
- 490 02f2 784B     		ldr	r3, .L31+12
- 491 02f4 9B69     		ldr	r3, [r3, #24]
- 492 02f6 774A     		ldr	r2, .L31+12
- 493 02f8 43F40013 		orr	r3, r3, #2097152
- 494 02fc 9361     		str	r3, [r2, #24]
- 105:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
- 495              		.loc 1 105 21
- 496 02fe 754B     		ldr	r3, .L31+12
- 497 0300 9B69     		ldr	r3, [r3, #24]
- 498 0302 744A     		ldr	r2, .L31+12
- 499 0304 43F40023 		orr	r3, r3, #524288
- 500 0308 9361     		str	r3, [r2, #24]
- 106:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
- 501              		.loc 1 106 21
- 502 030a 714B     		ldr	r3, .L31+8
- 503 030c 9B69     		ldr	r3, [r3, #24]
- 504 030e 704A     		ldr	r2, .L31+8
- 505 0310 43F48013 		orr	r3, r3, #1048576
- 506 0314 9361     		str	r3, [r2, #24]
- 107:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
- 507              		.loc 1 107 21
- 508 0316 6F4B     		ldr	r3, .L31+12
- 509 0318 9B69     		ldr	r3, [r3, #24]
- 510 031a 6E4A     		ldr	r2, .L31+12
- 511 031c 43F48013 		orr	r3, r3, #1048576
- 512 0320 9361     		str	r3, [r2, #24]
- 513              	.L9:
- 108:Core/Src/main.c ****                 }
- 109:Core/Src/main.c ****             }
- 110:Core/Src/main.c ****             if (Btn2_State == 2){
- 514              		.loc 1 110 28
- 515 0322 6E4B     		ldr	r3, .L31+20
- 516 0324 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 517              		.loc 1 110 16
- 518 0326 022B     		cmp	r3, #2
- 519 0328 7FF474AE 		bne	.L28
- 111:Core/Src/main.c ****                 if (GlobalTickCount == 0){
- 520              		.loc 1 111 37
- 521 032c 664B     		ldr	r3, .L31
- 522 032e 1B68     		ldr	r3, [r3]
- 523              		.loc 1 111 20
- 524 0330 002B     		cmp	r3, #0
- 525 0332 24D1     		bne	.L14
- 112:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
- 526              		.loc 1 112 21
- 527 0334 654B     		ldr	r3, .L31+4
- 528 0336 9B69     		ldr	r3, [r3, #24]
- 529 0338 644A     		ldr	r2, .L31+4
- 530 033a 43F48003 		orr	r3, r3, #4194304
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 12
+ 553 02f6 814A     		ldr	r2, .L46+12
+ 554 02f8 43F48013 		orr	r3, r3, #1048576
+ 555 02fc 9361     		str	r3, [r2, #24]
+ 113:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS6);
+ 556              		.loc 1 113 21
+ 557 02fe 7E4B     		ldr	r3, .L46+8
+ 558 0300 9B69     		ldr	r3, [r3, #24]
+ 559 0302 7D4A     		ldr	r2, .L46+8
+ 560 0304 43F04003 		orr	r3, r3, #64
+ 561 0308 9361     		str	r3, [r2, #24]
+ 114:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS4);
+ 562              		.loc 1 114 21
+ 563 030a 7A4B     		ldr	r3, .L46+4
+ 564 030c 9B69     		ldr	r3, [r3, #24]
+ 565 030e 794A     		ldr	r2, .L46+4
+ 566 0310 43F01003 		orr	r3, r3, #16
+ 567 0314 9361     		str	r3, [r2, #24]
+ 115:Core/Src/main.c ****                     PairLedState = 2;
+ 568              		.loc 1 115 34
+ 569 0316 7A4B     		ldr	r3, .L46+16
+ 570 0318 0222     		movs	r2, #2
+ 571 031a 1A70     		strb	r2, [r3]
+ 572 031c 26E0     		b	.L9
+ 573              	.L13:
+ 116:Core/Src/main.c ****                 }
+ 117:Core/Src/main.c ****                 else {
+ 118:Core/Src/main.c ****                     GlobalTickCount = 0;
+ 574              		.loc 1 118 37
+ 575 031e 744B     		ldr	r3, .L46
+ 576 0320 0022     		movs	r2, #0
+ 577 0322 1A60     		str	r2, [r3]
+ 119:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
+ 578              		.loc 1 119 21
+ 579 0324 744B     		ldr	r3, .L46+8
+ 580 0326 9B69     		ldr	r3, [r3, #24]
+ 581 0328 734A     		ldr	r2, .L46+8
+ 582 032a 43F48003 		orr	r3, r3, #4194304
+ 583 032e 9361     		str	r3, [r2, #24]
+ 120:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
+ 584              		.loc 1 120 21
+ 585 0330 714B     		ldr	r3, .L46+8
+ 586 0332 9B69     		ldr	r3, [r3, #24]
+ 587 0334 704A     		ldr	r2, .L46+8
+ 588 0336 43F40003 		orr	r3, r3, #8388608
+ 589 033a 9361     		str	r3, [r2, #24]
+ 121:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
+ 590              		.loc 1 121 21
+ 591 033c 6D4B     		ldr	r3, .L46+4
+ 592 033e 9B69     		ldr	r3, [r3, #24]
+ 593 0340 6C4A     		ldr	r2, .L46+4
+ 594 0342 43F40013 		orr	r3, r3, #2097152
+ 595 0346 9361     		str	r3, [r2, #24]
+ 122:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
+ 596              		.loc 1 122 21
+ 597 0348 6A4B     		ldr	r3, .L46+4
+ 598 034a 9B69     		ldr	r3, [r3, #24]
+ 599 034c 694A     		ldr	r2, .L46+4
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 13
 
 
- 531 033e 9361     		str	r3, [r2, #24]
- 113:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
- 532              		.loc 1 113 21
- 533 0340 624B     		ldr	r3, .L31+4
- 534 0342 9B69     		ldr	r3, [r3, #24]
- 535 0344 614A     		ldr	r2, .L31+4
- 536 0346 43F40003 		orr	r3, r3, #8388608
- 537 034a 9361     		str	r3, [r2, #24]
- 114:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
- 538              		.loc 1 114 21
- 539 034c 614B     		ldr	r3, .L31+12
- 540 034e 9B69     		ldr	r3, [r3, #24]
- 541 0350 604A     		ldr	r2, .L31+12
- 542 0352 43F40013 		orr	r3, r3, #2097152
- 543 0356 9361     		str	r3, [r2, #24]
- 115:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
- 544              		.loc 1 115 21
- 545 0358 5E4B     		ldr	r3, .L31+12
- 546 035a 9B69     		ldr	r3, [r3, #24]
- 547 035c 5D4A     		ldr	r2, .L31+12
- 548 035e 43F40023 		orr	r3, r3, #524288
- 549 0362 9361     		str	r3, [r2, #24]
- 116:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
- 550              		.loc 1 116 21
- 551 0364 5A4B     		ldr	r3, .L31+8
- 552 0366 9B69     		ldr	r3, [r3, #24]
- 553 0368 594A     		ldr	r2, .L31+8
- 554 036a 43F48013 		orr	r3, r3, #1048576
- 555 036e 9361     		str	r3, [r2, #24]
- 117:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
- 556              		.loc 1 117 21
- 557 0370 584B     		ldr	r3, .L31+12
- 558 0372 9B69     		ldr	r3, [r3, #24]
- 559 0374 574A     		ldr	r2, .L31+12
- 560 0376 43F48013 		orr	r3, r3, #1048576
- 561 037a 9361     		str	r3, [r2, #24]
- 118:Core/Src/main.c ****                     continue;
- 562              		.loc 1 118 21
- 563 037c 27E1     		b	.L5
- 564              	.L14:
- 119:Core/Src/main.c ****                 }
- 120:Core/Src/main.c ****                 if ((GlobalTickCount > 0) & (GlobalTickCount <= FREQUENCY_2_2_HZ_MS)){
- 565              		.loc 1 120 43
- 566 037e 524B     		ldr	r3, .L31
- 567 0380 1B68     		ldr	r3, [r3]
- 568 0382 013B     		subs	r3, r3, #1
- 569              		.loc 1 120 20
- 570 0384 B3F5E37F 		cmp	r3, #454
- 571 0388 1BD2     		bcs	.L15
- 121:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR6);
- 572              		.loc 1 121 21
- 573 038a 504B     		ldr	r3, .L31+4
- 574 038c 9B69     		ldr	r3, [r3, #24]
- 575 038e 4F4A     		ldr	r2, .L31+4
- 576 0390 43F48003 		orr	r3, r3, #4194304
- 577 0394 9361     		str	r3, [r2, #24]
- 122:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR4);
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 13
+ 600 034e 43F40023 		orr	r3, r3, #524288
+ 601 0352 9361     		str	r3, [r2, #24]
+ 123:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
+ 602              		.loc 1 123 21
+ 603 0354 694B     		ldr	r3, .L46+12
+ 604 0356 9B69     		ldr	r3, [r3, #24]
+ 605 0358 684A     		ldr	r2, .L46+12
+ 606 035a 43F48013 		orr	r3, r3, #1048576
+ 607 035e 9361     		str	r3, [r2, #24]
+ 124:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
+ 608              		.loc 1 124 21
+ 609 0360 644B     		ldr	r3, .L46+4
+ 610 0362 9B69     		ldr	r3, [r3, #24]
+ 611 0364 634A     		ldr	r2, .L46+4
+ 612 0366 43F48013 		orr	r3, r3, #1048576
+ 613 036a 9361     		str	r3, [r2, #24]
+ 614              	.L9:
+ 125:Core/Src/main.c ****                 }
+ 126:Core/Src/main.c ****             }
+ 127:Core/Src/main.c ****             if (Btn2_State == 2){
+ 615              		.loc 1 127 28
+ 616 036c 654B     		ldr	r3, .L46+20
+ 617 036e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 618              		.loc 1 127 16
+ 619 0370 022B     		cmp	r3, #2
+ 620 0372 7FF44FAE 		bne	.L43
+ 128:Core/Src/main.c ****                 if (GlobalTickCount == 0){
+ 621              		.loc 1 128 37
+ 622 0376 5E4B     		ldr	r3, .L46
+ 623 0378 1B68     		ldr	r3, [r3]
+ 624              		.loc 1 128 20
+ 625 037a 002B     		cmp	r3, #0
+ 626 037c 24D1     		bne	.L14
+ 129:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
+ 627              		.loc 1 129 21
+ 628 037e 5E4B     		ldr	r3, .L46+8
+ 629 0380 9B69     		ldr	r3, [r3, #24]
+ 630 0382 5D4A     		ldr	r2, .L46+8
+ 631 0384 43F48003 		orr	r3, r3, #4194304
+ 632 0388 9361     		str	r3, [r2, #24]
+ 130:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
+ 633              		.loc 1 130 21
+ 634 038a 5B4B     		ldr	r3, .L46+8
+ 635 038c 9B69     		ldr	r3, [r3, #24]
+ 636 038e 5A4A     		ldr	r2, .L46+8
+ 637 0390 43F40003 		orr	r3, r3, #8388608
+ 638 0394 9361     		str	r3, [r2, #24]
+ 131:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
+ 639              		.loc 1 131 21
+ 640 0396 574B     		ldr	r3, .L46+4
+ 641 0398 9B69     		ldr	r3, [r3, #24]
+ 642 039a 564A     		ldr	r2, .L46+4
+ 643 039c 43F40013 		orr	r3, r3, #2097152
+ 644 03a0 9361     		str	r3, [r2, #24]
+ 132:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
+ 645              		.loc 1 132 21
+ 646 03a2 544B     		ldr	r3, .L46+4
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 14
 
 
- 578              		.loc 1 122 21
- 579 0396 4F4B     		ldr	r3, .L31+12
- 580 0398 9B69     		ldr	r3, [r3, #24]
- 581 039a 4E4A     		ldr	r2, .L31+12
- 582 039c 43F48013 		orr	r3, r3, #1048576
- 583 03a0 9361     		str	r3, [r2, #24]
- 123:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS5);
- 584              		.loc 1 123 21
- 585 03a2 4C4B     		ldr	r3, .L31+12
- 586 03a4 9B69     		ldr	r3, [r3, #24]
- 587 03a6 4B4A     		ldr	r2, .L31+12
- 588 03a8 43F02003 		orr	r3, r3, #32
- 589 03ac 9361     		str	r3, [r2, #24]
- 124:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS3);
- 590              		.loc 1 124 21
- 591 03ae 494B     		ldr	r3, .L31+12
- 592 03b0 9B69     		ldr	r3, [r3, #24]
- 593 03b2 484A     		ldr	r2, .L31+12
- 594 03b4 43F00803 		orr	r3, r3, #8
- 595 03b8 9361     		str	r3, [r2, #24]
- 125:Core/Src/main.c ****                     PairLedState = 0;
- 596              		.loc 1 125 34
- 597 03ba 474B     		ldr	r3, .L31+16
- 598 03bc 0022     		movs	r2, #0
- 599 03be 1A70     		strb	r2, [r3]
- 600 03c0 28E6     		b	.L28
- 601              	.L15:
- 126:Core/Src/main.c ****                 }
- 127:Core/Src/main.c ****                 else if (GlobalTickCount <= 2 * FREQUENCY_2_2_HZ_MS){
- 602              		.loc 1 127 42
- 603 03c2 414B     		ldr	r3, .L31
- 604 03c4 1B68     		ldr	r3, [r3]
- 605              		.loc 1 127 25
- 606 03c6 40F28D32 		movw	r2, #909
- 607 03ca 9342     		cmp	r3, r2
- 608 03cc 1BD8     		bhi	.L16
- 128:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);
- 609              		.loc 1 128 21
- 610 03ce 414B     		ldr	r3, .L31+12
- 611 03d0 9B69     		ldr	r3, [r3, #24]
- 612 03d2 404A     		ldr	r2, .L31+12
- 613 03d4 43F40013 		orr	r3, r3, #2097152
- 614 03d8 9361     		str	r3, [r2, #24]
- 129:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR3);
- 615              		.loc 1 129 21
- 616 03da 3E4B     		ldr	r3, .L31+12
- 617 03dc 9B69     		ldr	r3, [r3, #24]
- 618 03de 3D4A     		ldr	r2, .L31+12
- 619 03e0 43F40023 		orr	r3, r3, #524288
- 620 03e4 9361     		str	r3, [r2, #24]
- 130:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS7);
- 621              		.loc 1 130 21
- 622 03e6 394B     		ldr	r3, .L31+4
- 623 03e8 9B69     		ldr	r3, [r3, #24]
- 624 03ea 384A     		ldr	r2, .L31+4
- 625 03ec 43F08003 		orr	r3, r3, #128
- 626 03f0 9361     		str	r3, [r2, #24]
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 14
+ 647 03a4 9B69     		ldr	r3, [r3, #24]
+ 648 03a6 534A     		ldr	r2, .L46+4
+ 649 03a8 43F40023 		orr	r3, r3, #524288
+ 650 03ac 9361     		str	r3, [r2, #24]
+ 133:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
+ 651              		.loc 1 133 21
+ 652 03ae 534B     		ldr	r3, .L46+12
+ 653 03b0 9B69     		ldr	r3, [r3, #24]
+ 654 03b2 524A     		ldr	r2, .L46+12
+ 655 03b4 43F48013 		orr	r3, r3, #1048576
+ 656 03b8 9361     		str	r3, [r2, #24]
+ 134:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
+ 657              		.loc 1 134 21
+ 658 03ba 4E4B     		ldr	r3, .L46+4
+ 659 03bc 9B69     		ldr	r3, [r3, #24]
+ 660 03be 4D4A     		ldr	r2, .L46+4
+ 661 03c0 43F48013 		orr	r3, r3, #1048576
+ 662 03c4 9361     		str	r3, [r2, #24]
+ 135:Core/Src/main.c ****                     continue;
+ 663              		.loc 1 135 21
+ 664 03c6 B1E1     		b	.L5
+ 665              	.L14:
+ 136:Core/Src/main.c ****                 }
+ 137:Core/Src/main.c ****                 if ((GlobalTickCount > 0) & (GlobalTickCount <= FREQUENCY_2_2_HZ_MS)){
+ 666              		.loc 1 137 43
+ 667 03c8 494B     		ldr	r3, .L46
+ 668 03ca 1B68     		ldr	r3, [r3]
+ 669 03cc 013B     		subs	r3, r3, #1
+ 670              		.loc 1 137 20
+ 671 03ce B3F5E37F 		cmp	r3, #454
+ 672 03d2 1BD2     		bcs	.L15
+ 138:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR6);
+ 673              		.loc 1 138 21
+ 674 03d4 484B     		ldr	r3, .L46+8
+ 675 03d6 9B69     		ldr	r3, [r3, #24]
+ 676 03d8 474A     		ldr	r2, .L46+8
+ 677 03da 43F48003 		orr	r3, r3, #4194304
+ 678 03de 9361     		str	r3, [r2, #24]
+ 139:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR4);
+ 679              		.loc 1 139 21
+ 680 03e0 444B     		ldr	r3, .L46+4
+ 681 03e2 9B69     		ldr	r3, [r3, #24]
+ 682 03e4 434A     		ldr	r2, .L46+4
+ 683 03e6 43F48013 		orr	r3, r3, #1048576
+ 684 03ea 9361     		str	r3, [r2, #24]
+ 140:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS5);
+ 685              		.loc 1 140 21
+ 686 03ec 414B     		ldr	r3, .L46+4
+ 687 03ee 9B69     		ldr	r3, [r3, #24]
+ 688 03f0 404A     		ldr	r2, .L46+4
+ 689 03f2 43F02003 		orr	r3, r3, #32
+ 690 03f6 9361     		str	r3, [r2, #24]
+ 141:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS3);
+ 691              		.loc 1 141 21
+ 692 03f8 3E4B     		ldr	r3, .L46+4
+ 693 03fa 9B69     		ldr	r3, [r3, #24]
+ 694 03fc 3D4A     		ldr	r2, .L46+4
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 15
 
 
- 131:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BS4);
- 627              		.loc 1 131 21
- 628 03f2 374B     		ldr	r3, .L31+8
- 629 03f4 9B69     		ldr	r3, [r3, #24]
- 630 03f6 364A     		ldr	r2, .L31+8
- 631 03f8 43F01003 		orr	r3, r3, #16
- 632 03fc 9361     		str	r3, [r2, #24]
- 132:Core/Src/main.c ****                     PairLedState = 1;
- 633              		.loc 1 132 34
- 634 03fe 364B     		ldr	r3, .L31+16
- 635 0400 0122     		movs	r2, #1
- 636 0402 1A70     		strb	r2, [r3]
- 637 0404 06E6     		b	.L28
- 638              	.L16:
- 133:Core/Src/main.c ****                 } 
- 134:Core/Src/main.c ****                 else if (GlobalTickCount <= 3 * FREQUENCY_2_2_HZ_MS) {
- 639              		.loc 1 134 42
- 640 0406 304B     		ldr	r3, .L31
- 641 0408 1B68     		ldr	r3, [r3]
- 642              		.loc 1 134 25
- 643 040a 40F25352 		movw	r2, #1363
- 644 040e 9342     		cmp	r3, r2
- 645 0410 1BD8     		bhi	.L17
- 135:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR7);
- 646              		.loc 1 135 21
- 647 0412 2E4B     		ldr	r3, .L31+4
- 648 0414 9B69     		ldr	r3, [r3, #24]
- 649 0416 2D4A     		ldr	r2, .L31+4
- 650 0418 43F40003 		orr	r3, r3, #8388608
- 651 041c 9361     		str	r3, [r2, #24]
- 136:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BR4);
- 652              		.loc 1 136 21
- 653 041e 2C4B     		ldr	r3, .L31+8
- 654 0420 9B69     		ldr	r3, [r3, #24]
- 655 0422 2B4A     		ldr	r2, .L31+8
- 656 0424 43F48013 		orr	r3, r3, #1048576
- 657 0428 9361     		str	r3, [r2, #24]
- 137:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS6);
- 658              		.loc 1 137 21
- 659 042a 284B     		ldr	r3, .L31+4
- 660 042c 9B69     		ldr	r3, [r3, #24]
- 661 042e 274A     		ldr	r2, .L31+4
- 662 0430 43F04003 		orr	r3, r3, #64
- 663 0434 9361     		str	r3, [r2, #24]
- 138:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS4);
- 664              		.loc 1 138 21
- 665 0436 274B     		ldr	r3, .L31+12
- 666 0438 9B69     		ldr	r3, [r3, #24]
- 667 043a 264A     		ldr	r2, .L31+12
- 668 043c 43F01003 		orr	r3, r3, #16
- 669 0440 9361     		str	r3, [r2, #24]
- 139:Core/Src/main.c ****                     PairLedState = 2;
- 670              		.loc 1 139 34
- 671 0442 254B     		ldr	r3, .L31+16
- 672 0444 0222     		movs	r2, #2
- 673 0446 1A70     		strb	r2, [r3]
- 674 0448 E4E5     		b	.L28
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 15
-
-
- 675              	.L17:
- 140:Core/Src/main.c ****                 }
- 141:Core/Src/main.c ****                 else {
- 142:Core/Src/main.c ****                     GlobalTickCount = 0;
- 676              		.loc 1 142 37
- 677 044a 1F4B     		ldr	r3, .L31
- 678 044c 0022     		movs	r2, #0
- 679 044e 1A60     		str	r2, [r3]
- 680 0450 E0E5     		b	.L28
- 681              	.L2:
+ 695 03fe 43F00803 		orr	r3, r3, #8
+ 696 0402 9361     		str	r3, [r2, #24]
+ 142:Core/Src/main.c ****                     PairLedState = 0;
+ 697              		.loc 1 142 34
+ 698 0404 3E4B     		ldr	r3, .L46+16
+ 699 0406 0022     		movs	r2, #0
+ 700 0408 1A70     		strb	r2, [r3]
+ 701 040a 03E6     		b	.L43
+ 702              	.L15:
  143:Core/Src/main.c ****                 }
- 144:Core/Src/main.c ****             }
- 145:Core/Src/main.c ****             // В 1-ом режиме надо включить 3-ий и 4-ый светодиод
- 146:Core/Src/main.c ****             // потом их выключить и включить 2-ой и 5-ый
- 147:Core/Src/main.c ****             // затем 1-ый и 6-ой
- 148:Core/Src/main.c ****         }
- 149:Core/Src/main.c ****         else{
- 150:Core/Src/main.c ****             if (GlobalTickCount == 0){
- 682              		.loc 1 150 33
- 683 0452 1D4B     		ldr	r3, .L31
- 684 0454 1B68     		ldr	r3, [r3]
- 685              		.loc 1 150 16
- 686 0456 002B     		cmp	r3, #0
- 687 0458 24D1     		bne	.L18
- 151:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
- 688              		.loc 1 151 17
- 689 045a 1C4B     		ldr	r3, .L31+4
- 690 045c 9B69     		ldr	r3, [r3, #24]
- 691 045e 1B4A     		ldr	r2, .L31+4
- 692 0460 43F48003 		orr	r3, r3, #4194304
- 693 0464 9361     		str	r3, [r2, #24]
- 152:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
- 694              		.loc 1 152 17
- 695 0466 194B     		ldr	r3, .L31+4
- 696 0468 9B69     		ldr	r3, [r3, #24]
- 697 046a 184A     		ldr	r2, .L31+4
- 698 046c 43F40003 		orr	r3, r3, #8388608
- 699 0470 9361     		str	r3, [r2, #24]
- 153:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
- 700              		.loc 1 153 17
- 701 0472 184B     		ldr	r3, .L31+12
- 702 0474 9B69     		ldr	r3, [r3, #24]
- 703 0476 174A     		ldr	r2, .L31+12
- 704 0478 43F40013 		orr	r3, r3, #2097152
- 705 047c 9361     		str	r3, [r2, #24]
- 154:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
- 706              		.loc 1 154 17
- 707 047e 154B     		ldr	r3, .L31+12
- 708 0480 9B69     		ldr	r3, [r3, #24]
- 709 0482 144A     		ldr	r2, .L31+12
- 710 0484 43F40023 		orr	r3, r3, #524288
- 711 0488 9361     		str	r3, [r2, #24]
- 155:Core/Src/main.c ****                 SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
- 712              		.loc 1 155 17
- 713 048a 114B     		ldr	r3, .L31+8
- 714 048c 9B69     		ldr	r3, [r3, #24]
- 715 048e 104A     		ldr	r2, .L31+8
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 16
+ 144:Core/Src/main.c ****                 else if (GlobalTickCount <= 2 * FREQUENCY_2_2_HZ_MS){
+ 703              		.loc 1 144 42
+ 704 040c 384B     		ldr	r3, .L46
+ 705 040e 1B68     		ldr	r3, [r3]
+ 706              		.loc 1 144 25
+ 707 0410 40F28D32 		movw	r2, #909
+ 708 0414 9342     		cmp	r3, r2
+ 709 0416 1BD8     		bhi	.L16
+ 145:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);
+ 710              		.loc 1 145 21
+ 711 0418 364B     		ldr	r3, .L46+4
+ 712 041a 9B69     		ldr	r3, [r3, #24]
+ 713 041c 354A     		ldr	r2, .L46+4
+ 714 041e 43F40013 		orr	r3, r3, #2097152
+ 715 0422 9361     		str	r3, [r2, #24]
+ 146:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR3);
+ 716              		.loc 1 146 21
+ 717 0424 334B     		ldr	r3, .L46+4
+ 718 0426 9B69     		ldr	r3, [r3, #24]
+ 719 0428 324A     		ldr	r2, .L46+4
+ 720 042a 43F40023 		orr	r3, r3, #524288
+ 721 042e 9361     		str	r3, [r2, #24]
+ 147:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS7);
+ 722              		.loc 1 147 21
+ 723 0430 314B     		ldr	r3, .L46+8
+ 724 0432 9B69     		ldr	r3, [r3, #24]
+ 725 0434 304A     		ldr	r2, .L46+8
+ 726 0436 43F08003 		orr	r3, r3, #128
+ 727 043a 9361     		str	r3, [r2, #24]
+ 148:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BS4);
+ 728              		.loc 1 148 21
+ 729 043c 2F4B     		ldr	r3, .L46+12
+ 730 043e 9B69     		ldr	r3, [r3, #24]
+ 731 0440 2E4A     		ldr	r2, .L46+12
+ 732 0442 43F01003 		orr	r3, r3, #16
+ 733 0446 9361     		str	r3, [r2, #24]
+ 149:Core/Src/main.c ****                     PairLedState = 1;
+ 734              		.loc 1 149 34
+ 735 0448 2D4B     		ldr	r3, .L46+16
+ 736 044a 0122     		movs	r2, #1
+ 737 044c 1A70     		strb	r2, [r3]
+ 738 044e E1E5     		b	.L43
+ 739              	.L16:
+ 150:Core/Src/main.c ****                 } 
+ 151:Core/Src/main.c ****                 else if (GlobalTickCount <= 3 * FREQUENCY_2_2_HZ_MS) {
+ 740              		.loc 1 151 42
+ 741 0450 274B     		ldr	r3, .L46
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 16
 
 
- 716 0490 43F48013 		orr	r3, r3, #1048576
- 717 0494 9361     		str	r3, [r2, #24]
- 156:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
- 718              		.loc 1 156 17
- 719 0496 0F4B     		ldr	r3, .L31+12
- 720 0498 9B69     		ldr	r3, [r3, #24]
- 721 049a 0E4A     		ldr	r2, .L31+12
- 722 049c 43F48013 		orr	r3, r3, #1048576
- 723 04a0 9361     		str	r3, [r2, #24]
- 157:Core/Src/main.c ****                 continue;
- 724              		.loc 1 157 17
- 725 04a2 94E0     		b	.L5
- 726              	.L18:
- 158:Core/Src/main.c ****             }
- 159:Core/Src/main.c ****             if (Btn2_State == 0) FlickerFrequency = FLICKER_PERIOD_0_3_HZ_MS;
- 727              		.loc 1 159 28
- 728 04a4 0D4B     		ldr	r3, .L31+20
- 729 04a6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 730              		.loc 1 159 16
- 731 04a8 002B     		cmp	r3, #0
- 732 04aa 04D1     		bne	.L19
- 733              		.loc 1 159 51 discriminator 1
- 734 04ac 0C4B     		ldr	r3, .L31+24
- 735 04ae 40F60552 		movw	r2, #3333
- 736 04b2 1A60     		str	r2, [r3]
- 737 04b4 1AE0     		b	.L20
- 738              	.L19:
- 160:Core/Src/main.c ****             else if (Btn2_State == 1) FlickerFrequency = FLICKER_PERIOD_0_8_HZ_MS;
- 739              		.loc 1 160 33
- 740 04b6 094B     		ldr	r3, .L31+20
- 741 04b8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 742              		.loc 1 160 21
- 743 04ba 012B     		cmp	r3, #1
- 744 04bc 12D1     		bne	.L21
- 745              		.loc 1 160 56 discriminator 1
- 746 04be 084B     		ldr	r3, .L31+24
- 747 04c0 40F2E242 		movw	r2, #1250
- 748 04c4 1A60     		str	r2, [r3]
- 749 04c6 11E0     		b	.L20
- 750              	.L32:
- 751              		.align	2
- 752              	.L31:
- 753 04c8 00000000 		.word	GlobalTickCount
- 754 04cc 00080240 		.word	1073874944
- 755 04d0 00000240 		.word	1073872896
- 756 04d4 00040240 		.word	1073873920
- 757 04d8 00000000 		.word	PairLedState
- 758 04dc 00000000 		.word	Btn2_State
- 759 04e0 00000000 		.word	FlickerFrequency
- 760              	.L21:
- 161:Core/Src/main.c ****             else FlickerFrequency = FLICKER_PERIOD_1_4_HZ_MS;
- 761              		.loc 1 161 35
- 762 04e4 3A4B     		ldr	r3, .L33
- 763 04e6 40F2CA22 		movw	r2, #714
- 764 04ea 1A60     		str	r2, [r3]
- 765              	.L20:
- 162:Core/Src/main.c ****             if (GlobalTickCount == 1){
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 17
+ 742 0452 1B68     		ldr	r3, [r3]
+ 743              		.loc 1 151 25
+ 744 0454 40F25352 		movw	r2, #1363
+ 745 0458 9342     		cmp	r3, r2
+ 746 045a 1BD8     		bhi	.L17
+ 152:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR7);
+ 747              		.loc 1 152 21
+ 748 045c 264B     		ldr	r3, .L46+8
+ 749 045e 9B69     		ldr	r3, [r3, #24]
+ 750 0460 254A     		ldr	r2, .L46+8
+ 751 0462 43F40003 		orr	r3, r3, #8388608
+ 752 0466 9361     		str	r3, [r2, #24]
+ 153:Core/Src/main.c ****                     SET_BIT(GPIOA->BSRR, GPIO_BSRR_BR4);
+ 753              		.loc 1 153 21
+ 754 0468 244B     		ldr	r3, .L46+12
+ 755 046a 9B69     		ldr	r3, [r3, #24]
+ 756 046c 234A     		ldr	r2, .L46+12
+ 757 046e 43F48013 		orr	r3, r3, #1048576
+ 758 0472 9361     		str	r3, [r2, #24]
+ 154:Core/Src/main.c ****                     SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS6);
+ 759              		.loc 1 154 21
+ 760 0474 204B     		ldr	r3, .L46+8
+ 761 0476 9B69     		ldr	r3, [r3, #24]
+ 762 0478 1F4A     		ldr	r2, .L46+8
+ 763 047a 43F04003 		orr	r3, r3, #64
+ 764 047e 9361     		str	r3, [r2, #24]
+ 155:Core/Src/main.c ****                     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS4);
+ 765              		.loc 1 155 21
+ 766 0480 1C4B     		ldr	r3, .L46+4
+ 767 0482 9B69     		ldr	r3, [r3, #24]
+ 768 0484 1B4A     		ldr	r2, .L46+4
+ 769 0486 43F01003 		orr	r3, r3, #16
+ 770 048a 9361     		str	r3, [r2, #24]
+ 156:Core/Src/main.c ****                     PairLedState = 2;
+ 771              		.loc 1 156 34
+ 772 048c 1C4B     		ldr	r3, .L46+16
+ 773 048e 0222     		movs	r2, #2
+ 774 0490 1A70     		strb	r2, [r3]
+ 775 0492 BFE5     		b	.L43
+ 776              	.L17:
+ 157:Core/Src/main.c ****                 }
+ 158:Core/Src/main.c ****                 else {
+ 159:Core/Src/main.c ****                     GlobalTickCount = 0;
+ 777              		.loc 1 159 37
+ 778 0494 164B     		ldr	r3, .L46
+ 779 0496 0022     		movs	r2, #0
+ 780 0498 1A60     		str	r2, [r3]
+ 781 049a BBE5     		b	.L43
+ 782              	.L2:
+ 160:Core/Src/main.c ****                 }
+ 161:Core/Src/main.c ****             }
+ 162:Core/Src/main.c ****             // В 1-ом режиме надо включить 3-ий и 4-ый светодиод
+ 163:Core/Src/main.c ****             // потом их выключить и включить 2-ой и 5-ый
+ 164:Core/Src/main.c ****             // затем 1-ый и 6-ой
+ 165:Core/Src/main.c ****         }
+ 166:Core/Src/main.c ****         else{
+ 167:Core/Src/main.c ****             if (GlobalTickCount == 0){
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 17
 
 
- 766              		.loc 1 162 33
- 767 04ec 394B     		ldr	r3, .L33+4
- 768 04ee 1B68     		ldr	r3, [r3]
- 769              		.loc 1 162 16
- 770 04f0 012B     		cmp	r3, #1
- 771 04f2 05D1     		bne	.L22
- 163:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS6);
- 772              		.loc 1 163 17
- 773 04f4 384B     		ldr	r3, .L33+8
- 774 04f6 9B69     		ldr	r3, [r3, #24]
- 775 04f8 374A     		ldr	r2, .L33+8
- 776 04fa 43F04003 		orr	r3, r3, #64
- 777 04fe 9361     		str	r3, [r2, #24]
- 778              	.L22:
- 164:Core/Src/main.c ****             }
- 165:Core/Src/main.c ****             if (GlobalTickCount  == POWERON_PERIOD / 6){
- 779              		.loc 1 165 34
- 780 0500 344B     		ldr	r3, .L33+4
- 781 0502 1B68     		ldr	r3, [r3]
- 782              		.loc 1 165 16
- 783 0504 B3F5FA6F 		cmp	r3, #2000
- 784 0508 05D1     		bne	.L23
- 166:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS7);
- 785              		.loc 1 166 17
- 786 050a 334B     		ldr	r3, .L33+8
- 787 050c 9B69     		ldr	r3, [r3, #24]
- 788 050e 324A     		ldr	r2, .L33+8
- 789 0510 43F08003 		orr	r3, r3, #128
- 790 0514 9361     		str	r3, [r2, #24]
- 791              	.L23:
- 167:Core/Src/main.c ****             }
- 168:Core/Src/main.c ****             if ((GlobalTickCount  == 2 * POWERON_PERIOD / 6)){
- 792              		.loc 1 168 35
- 793 0516 2F4B     		ldr	r3, .L33+4
- 794 0518 1B68     		ldr	r3, [r3]
- 795              		.loc 1 168 16
- 796 051a B3F57A6F 		cmp	r3, #4000
- 797 051e 05D1     		bne	.L24
- 169:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS5);  
- 798              		.loc 1 169 17
- 799 0520 2E4B     		ldr	r3, .L33+12
- 800 0522 9B69     		ldr	r3, [r3, #24]
- 801 0524 2D4A     		ldr	r2, .L33+12
- 802 0526 43F02003 		orr	r3, r3, #32
- 803 052a 9361     		str	r3, [r2, #24]
- 804              	.L24:
- 170:Core/Src/main.c ****             } 
- 171:Core/Src/main.c ****             if (GlobalTickCount  == 3 * POWERON_PERIOD / 6){
- 805              		.loc 1 171 34
- 806 052c 294B     		ldr	r3, .L33+4
- 807 052e 1B68     		ldr	r3, [r3]
- 808              		.loc 1 171 16
- 809 0530 41F27072 		movw	r2, #6000
- 810 0534 9342     		cmp	r3, r2
- 811 0536 05D1     		bne	.L25
- 172:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS3);
- 812              		.loc 1 172 17
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 18
+ 783              		.loc 1 167 33
+ 784 049c 144B     		ldr	r3, .L46
+ 785 049e 1B68     		ldr	r3, [r3]
+ 786              		.loc 1 167 16
+ 787 04a0 002B     		cmp	r3, #0
+ 788 04a2 31D1     		bne	.L18
+ 168:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
+ 789              		.loc 1 168 17
+ 790 04a4 144B     		ldr	r3, .L46+8
+ 791 04a6 9B69     		ldr	r3, [r3, #24]
+ 792 04a8 134A     		ldr	r2, .L46+8
+ 793 04aa 43F48003 		orr	r3, r3, #4194304
+ 794 04ae 9361     		str	r3, [r2, #24]
+ 169:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
+ 795              		.loc 1 169 17
+ 796 04b0 114B     		ldr	r3, .L46+8
+ 797 04b2 9B69     		ldr	r3, [r3, #24]
+ 798 04b4 104A     		ldr	r2, .L46+8
+ 799 04b6 43F40003 		orr	r3, r3, #8388608
+ 800 04ba 9361     		str	r3, [r2, #24]
+ 170:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
+ 801              		.loc 1 170 17
+ 802 04bc 0D4B     		ldr	r3, .L46+4
+ 803 04be 9B69     		ldr	r3, [r3, #24]
+ 804 04c0 0C4A     		ldr	r2, .L46+4
+ 805 04c2 43F40013 		orr	r3, r3, #2097152
+ 806 04c6 9361     		str	r3, [r2, #24]
+ 171:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
+ 807              		.loc 1 171 17
+ 808 04c8 0A4B     		ldr	r3, .L46+4
+ 809 04ca 9B69     		ldr	r3, [r3, #24]
+ 810 04cc 094A     		ldr	r2, .L46+4
+ 811 04ce 43F40023 		orr	r3, r3, #524288
+ 812 04d2 9361     		str	r3, [r2, #24]
+ 172:Core/Src/main.c ****                 SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
+ 813              		.loc 1 172 17
+ 814 04d4 094B     		ldr	r3, .L46+12
+ 815 04d6 9B69     		ldr	r3, [r3, #24]
+ 816 04d8 084A     		ldr	r2, .L46+12
+ 817 04da 43F48013 		orr	r3, r3, #1048576
+ 818 04de 9361     		str	r3, [r2, #24]
+ 173:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
+ 819              		.loc 1 173 17
+ 820 04e0 044B     		ldr	r3, .L46+4
+ 821 04e2 9B69     		ldr	r3, [r3, #24]
+ 822 04e4 034A     		ldr	r2, .L46+4
+ 823 04e6 43F48013 		orr	r3, r3, #1048576
+ 824 04ea 9361     		str	r3, [r2, #24]
+ 174:Core/Src/main.c ****                 continue;
+ 825              		.loc 1 174 17
+ 826 04ec 1EE1     		b	.L5
+ 827              	.L47:
+ 828 04ee 00BF     		.align	2
+ 829              	.L46:
+ 830 04f0 00000000 		.word	GlobalTickCount
+ 831 04f4 00040240 		.word	1073873920
+ 832 04f8 00080240 		.word	1073874944
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 18
 
 
- 813 0538 284B     		ldr	r3, .L33+12
- 814 053a 9B69     		ldr	r3, [r3, #24]
- 815 053c 274A     		ldr	r2, .L33+12
- 816 053e 43F00803 		orr	r3, r3, #8
- 817 0542 9361     		str	r3, [r2, #24]
- 818              	.L25:
- 173:Core/Src/main.c ****             }  
- 174:Core/Src/main.c ****             if (GlobalTickCount  == 4 * POWERON_PERIOD / 6){
- 819              		.loc 1 174 34
- 820 0544 234B     		ldr	r3, .L33+4
- 821 0546 1B68     		ldr	r3, [r3]
- 822              		.loc 1 174 16
- 823 0548 B3F5FA5F 		cmp	r3, #8000
- 824 054c 05D1     		bne	.L26
- 175:Core/Src/main.c ****                 SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BS4);
- 825              		.loc 1 175 17
- 826 054e 244B     		ldr	r3, .L33+16
- 827 0550 9B69     		ldr	r3, [r3, #24]
- 828 0552 234A     		ldr	r2, .L33+16
- 829 0554 43F01003 		orr	r3, r3, #16
- 830 0558 9361     		str	r3, [r2, #24]
- 831              	.L26:
- 176:Core/Src/main.c ****             }   
- 177:Core/Src/main.c ****             if (GlobalTickCount  == 5 * POWERON_PERIOD / 6){
- 832              		.loc 1 177 34
- 833 055a 1E4B     		ldr	r3, .L33+4
- 834 055c 1B68     		ldr	r3, [r3]
- 835              		.loc 1 177 16
- 836 055e 42F21072 		movw	r2, #10000
- 837 0562 9342     		cmp	r3, r2
- 838 0564 05D1     		bne	.L27
- 178:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS4);
- 839              		.loc 1 178 17
- 840 0566 1D4B     		ldr	r3, .L33+12
- 841 0568 9B69     		ldr	r3, [r3, #24]
- 842 056a 1C4A     		ldr	r2, .L33+12
- 843 056c 43F01003 		orr	r3, r3, #16
- 844 0570 9361     		str	r3, [r2, #24]
- 845              	.L27:
- 179:Core/Src/main.c ****             } 
- 180:Core/Src/main.c ****             if (GlobalTickCount  == 6 * POWERON_PERIOD / 6) {
- 846              		.loc 1 180 34
- 847 0572 184B     		ldr	r3, .L33+4
- 848 0574 1B68     		ldr	r3, [r3]
- 849              		.loc 1 180 16
- 850 0576 42F6E062 		movw	r2, #12000
- 851 057a 9342     		cmp	r3, r2
- 852 057c 7FF44AAD 		bne	.L28
- 181:Core/Src/main.c ****                 GlobalTickCount = 0;
- 853              		.loc 1 181 33
- 854 0580 144B     		ldr	r3, .L33+4
- 855 0582 0022     		movs	r2, #0
- 856 0584 1A60     		str	r2, [r3]
- 182:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
- 857              		.loc 1 182 17
- 858 0586 144B     		ldr	r3, .L33+8
- 859 0588 9B69     		ldr	r3, [r3, #24]
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 19
+ 833 04fc 00000240 		.word	1073872896
+ 834 0500 00000000 		.word	PairLedState
+ 835 0504 00000000 		.word	Btn2_State
+ 836              	.L18:
+ 175:Core/Src/main.c ****             }
+ 176:Core/Src/main.c ****             if (Btn3_State == 0) {
+ 837              		.loc 1 176 28
+ 838 0508 894B     		ldr	r3, .L48
+ 839 050a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 840              		.loc 1 176 16
+ 841 050c 002B     		cmp	r3, #0
+ 842 050e 16D1     		bne	.L19
+ 177:Core/Src/main.c ****                 if (Btn2_State == 0) Flicker_Led1Frequency = FLICKER_PERIOD_0_3_HZ_MS;
+ 843              		.loc 1 177 32
+ 844 0510 884B     		ldr	r3, .L48+4
+ 845 0512 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 846              		.loc 1 177 20
+ 847 0514 002B     		cmp	r3, #0
+ 848 0516 04D1     		bne	.L20
+ 849              		.loc 1 177 60 discriminator 1
+ 850 0518 874B     		ldr	r3, .L48+8
+ 851 051a 40F60552 		movw	r2, #3333
+ 852 051e 1A60     		str	r2, [r3]
+ 853 0520 93E0     		b	.L21
+ 854              	.L20:
+ 178:Core/Src/main.c ****                 else if (Btn2_State == 1) Flicker_Led1Frequency = FLICKER_PERIOD_0_8_HZ_MS;
+ 855              		.loc 1 178 37
+ 856 0522 844B     		ldr	r3, .L48+4
+ 857 0524 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 858              		.loc 1 178 25
+ 859 0526 012B     		cmp	r3, #1
+ 860 0528 04D1     		bne	.L22
+ 861              		.loc 1 178 65 discriminator 1
+ 862 052a 834B     		ldr	r3, .L48+8
+ 863 052c 40F2E242 		movw	r2, #1250
+ 864 0530 1A60     		str	r2, [r3]
+ 865 0532 8AE0     		b	.L21
+ 866              	.L22:
+ 179:Core/Src/main.c ****                 else Flicker_Led1Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 867              		.loc 1 179 44
+ 868 0534 804B     		ldr	r3, .L48+8
+ 869 0536 40F2CA22 		movw	r2, #714
+ 870 053a 1A60     		str	r2, [r3]
+ 871 053c 85E0     		b	.L21
+ 872              	.L19:
+ 180:Core/Src/main.c ****             }
+ 181:Core/Src/main.c ****             else if (Btn3_State == 1){
+ 873              		.loc 1 181 33
+ 874 053e 7C4B     		ldr	r3, .L48
+ 875 0540 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 876              		.loc 1 181 21
+ 877 0542 012B     		cmp	r3, #1
+ 878 0544 16D1     		bne	.L23
+ 182:Core/Src/main.c ****                 if (Btn2_State == 0) Flicker_Led2Frequency = FLICKER_PERIOD_0_3_HZ_MS;
+ 879              		.loc 1 182 32
+ 880 0546 7B4B     		ldr	r3, .L48+4
+ 881 0548 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 19
 
 
- 860 058a 134A     		ldr	r2, .L33+8
- 861 058c 43F48003 		orr	r3, r3, #4194304
- 862 0590 9361     		str	r3, [r2, #24]
- 183:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
- 863              		.loc 1 183 17
- 864 0592 114B     		ldr	r3, .L33+8
- 865 0594 9B69     		ldr	r3, [r3, #24]
- 866 0596 104A     		ldr	r2, .L33+8
- 867 0598 43F40003 		orr	r3, r3, #8388608
- 868 059c 9361     		str	r3, [r2, #24]
- 184:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
- 869              		.loc 1 184 17
- 870 059e 0F4B     		ldr	r3, .L33+12
- 871 05a0 9B69     		ldr	r3, [r3, #24]
- 872 05a2 0E4A     		ldr	r2, .L33+12
- 873 05a4 43F40013 		orr	r3, r3, #2097152
- 874 05a8 9361     		str	r3, [r2, #24]
- 185:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
- 875              		.loc 1 185 17
- 876 05aa 0C4B     		ldr	r3, .L33+12
- 877 05ac 9B69     		ldr	r3, [r3, #24]
- 878 05ae 0B4A     		ldr	r2, .L33+12
- 879 05b0 43F40023 		orr	r3, r3, #524288
- 880 05b4 9361     		str	r3, [r2, #24]
- 186:Core/Src/main.c ****                 SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
- 881              		.loc 1 186 17
- 882 05b6 0A4B     		ldr	r3, .L33+16
- 883 05b8 9B69     		ldr	r3, [r3, #24]
- 884 05ba 094A     		ldr	r2, .L33+16
- 885 05bc 43F48013 		orr	r3, r3, #1048576
- 886 05c0 9361     		str	r3, [r2, #24]
- 187:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
- 887              		.loc 1 187 17
- 888 05c2 064B     		ldr	r3, .L33+12
- 889 05c4 9B69     		ldr	r3, [r3, #24]
- 890 05c6 054A     		ldr	r2, .L33+12
- 891 05c8 43F48013 		orr	r3, r3, #1048576
- 892 05cc 9361     		str	r3, [r2, #24]
- 893              	.L5:
-  25:Core/Src/main.c ****             
- 894              		.loc 1 25 12
- 895 05ce 21E5     		b	.L28
- 896              	.L34:
- 897              		.align	2
- 898              	.L33:
- 899 05d0 00000000 		.word	FlickerFrequency
- 900 05d4 00000000 		.word	GlobalTickCount
- 901 05d8 00080240 		.word	1073874944
- 902 05dc 00040240 		.word	1073873920
- 903 05e0 00000240 		.word	1073872896
- 904              		.cfi_endproc
- 905              	.LFE130:
- 907              		.text
- 908              	.Letext0:
- 909              		.file 2 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/machine/_default_types.h
- 910              		.file 3 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/sys/_stdint.h"
- 911              		.file 4 "CMSIS/Devices/STM32F4xx/Inc/STM32F429xx/stm32f429xx.h"
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 20
+ 882              		.loc 1 182 20
+ 883 054a 002B     		cmp	r3, #0
+ 884 054c 04D1     		bne	.L24
+ 885              		.loc 1 182 60 discriminator 1
+ 886 054e 7B4B     		ldr	r3, .L48+12
+ 887 0550 40F60552 		movw	r2, #3333
+ 888 0554 1A60     		str	r2, [r3]
+ 889 0556 78E0     		b	.L21
+ 890              	.L24:
+ 183:Core/Src/main.c ****                 else if (Btn2_State == 1) Flicker_Led2Frequency = FLICKER_PERIOD_0_8_HZ_MS;
+ 891              		.loc 1 183 37
+ 892 0558 764B     		ldr	r3, .L48+4
+ 893 055a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 894              		.loc 1 183 25
+ 895 055c 012B     		cmp	r3, #1
+ 896 055e 04D1     		bne	.L25
+ 897              		.loc 1 183 65 discriminator 1
+ 898 0560 764B     		ldr	r3, .L48+12
+ 899 0562 40F2E242 		movw	r2, #1250
+ 900 0566 1A60     		str	r2, [r3]
+ 901 0568 6FE0     		b	.L21
+ 902              	.L25:
+ 184:Core/Src/main.c ****                 else Flicker_Led2Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 903              		.loc 1 184 44
+ 904 056a 744B     		ldr	r3, .L48+12
+ 905 056c 40F2CA22 		movw	r2, #714
+ 906 0570 1A60     		str	r2, [r3]
+ 907 0572 6AE0     		b	.L21
+ 908              	.L23:
+ 185:Core/Src/main.c ****             }
+ 186:Core/Src/main.c ****             else if (Btn3_State == 2){
+ 909              		.loc 1 186 33
+ 910 0574 6E4B     		ldr	r3, .L48
+ 911 0576 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 912              		.loc 1 186 21
+ 913 0578 022B     		cmp	r3, #2
+ 914 057a 16D1     		bne	.L26
+ 187:Core/Src/main.c ****                 if (Btn2_State == 0) Flicker_Led3Frequency = FLICKER_PERIOD_0_3_HZ_MS;
+ 915              		.loc 1 187 32
+ 916 057c 6D4B     		ldr	r3, .L48+4
+ 917 057e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 918              		.loc 1 187 20
+ 919 0580 002B     		cmp	r3, #0
+ 920 0582 04D1     		bne	.L27
+ 921              		.loc 1 187 60 discriminator 1
+ 922 0584 6E4B     		ldr	r3, .L48+16
+ 923 0586 40F60552 		movw	r2, #3333
+ 924 058a 1A60     		str	r2, [r3]
+ 925 058c 5DE0     		b	.L21
+ 926              	.L27:
+ 188:Core/Src/main.c ****                 else if (Btn2_State == 1) Flicker_Led3Frequency = FLICKER_PERIOD_0_8_HZ_MS;
+ 927              		.loc 1 188 37
+ 928 058e 694B     		ldr	r3, .L48+4
+ 929 0590 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 930              		.loc 1 188 25
+ 931 0592 012B     		cmp	r3, #1
+ 932 0594 04D1     		bne	.L28
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 20
 
 
- 912              		.file 5 "Core/Inc/init.h"
-ARM GAS  C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s 			page 21
+ 933              		.loc 1 188 65 discriminator 1
+ 934 0596 6A4B     		ldr	r3, .L48+16
+ 935 0598 40F2E242 		movw	r2, #1250
+ 936 059c 1A60     		str	r2, [r3]
+ 937 059e 54E0     		b	.L21
+ 938              	.L28:
+ 189:Core/Src/main.c ****                 else Flicker_Led3Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 939              		.loc 1 189 44
+ 940 05a0 674B     		ldr	r3, .L48+16
+ 941 05a2 40F2CA22 		movw	r2, #714
+ 942 05a6 1A60     		str	r2, [r3]
+ 943 05a8 4FE0     		b	.L21
+ 944              	.L26:
+ 190:Core/Src/main.c ****             }
+ 191:Core/Src/main.c ****             else if (Btn3_State == 3){
+ 945              		.loc 1 191 33
+ 946 05aa 614B     		ldr	r3, .L48
+ 947 05ac 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 948              		.loc 1 191 21
+ 949 05ae 032B     		cmp	r3, #3
+ 950 05b0 16D1     		bne	.L29
+ 192:Core/Src/main.c ****                 if (Btn2_State == 0) Flicker_Led4Frequency = FLICKER_PERIOD_0_3_HZ_MS;
+ 951              		.loc 1 192 32
+ 952 05b2 604B     		ldr	r3, .L48+4
+ 953 05b4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 954              		.loc 1 192 20
+ 955 05b6 002B     		cmp	r3, #0
+ 956 05b8 04D1     		bne	.L30
+ 957              		.loc 1 192 60 discriminator 1
+ 958 05ba 624B     		ldr	r3, .L48+20
+ 959 05bc 40F60552 		movw	r2, #3333
+ 960 05c0 1A60     		str	r2, [r3]
+ 961 05c2 42E0     		b	.L21
+ 962              	.L30:
+ 193:Core/Src/main.c ****                 else if (Btn2_State == 1) Flicker_Led4Frequency = FLICKER_PERIOD_0_8_HZ_MS;
+ 963              		.loc 1 193 37
+ 964 05c4 5B4B     		ldr	r3, .L48+4
+ 965 05c6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 966              		.loc 1 193 25
+ 967 05c8 012B     		cmp	r3, #1
+ 968 05ca 04D1     		bne	.L31
+ 969              		.loc 1 193 65 discriminator 1
+ 970 05cc 5D4B     		ldr	r3, .L48+20
+ 971 05ce 40F2E242 		movw	r2, #1250
+ 972 05d2 1A60     		str	r2, [r3]
+ 973 05d4 39E0     		b	.L21
+ 974              	.L31:
+ 194:Core/Src/main.c ****                 else Flicker_Led4Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 975              		.loc 1 194 44
+ 976 05d6 5B4B     		ldr	r3, .L48+20
+ 977 05d8 40F2CA22 		movw	r2, #714
+ 978 05dc 1A60     		str	r2, [r3]
+ 979 05de 34E0     		b	.L21
+ 980              	.L29:
+ 195:Core/Src/main.c ****             }
+ 196:Core/Src/main.c ****             else if (Btn3_State == 4){
+ 981              		.loc 1 196 33
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 21
+
+
+ 982 05e0 534B     		ldr	r3, .L48
+ 983 05e2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 984              		.loc 1 196 21
+ 985 05e4 042B     		cmp	r3, #4
+ 986 05e6 16D1     		bne	.L32
+ 197:Core/Src/main.c ****                 if (Btn2_State == 0) Flicker_Led5Frequency = FLICKER_PERIOD_0_3_HZ_MS;
+ 987              		.loc 1 197 32
+ 988 05e8 524B     		ldr	r3, .L48+4
+ 989 05ea 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 990              		.loc 1 197 20
+ 991 05ec 002B     		cmp	r3, #0
+ 992 05ee 04D1     		bne	.L33
+ 993              		.loc 1 197 60 discriminator 1
+ 994 05f0 554B     		ldr	r3, .L48+24
+ 995 05f2 40F60552 		movw	r2, #3333
+ 996 05f6 1A60     		str	r2, [r3]
+ 997 05f8 27E0     		b	.L21
+ 998              	.L33:
+ 198:Core/Src/main.c ****                 else if (Btn2_State == 1) Flicker_Led5Frequency = FLICKER_PERIOD_0_8_HZ_MS;
+ 999              		.loc 1 198 37
+ 1000 05fa 4E4B     		ldr	r3, .L48+4
+ 1001 05fc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1002              		.loc 1 198 25
+ 1003 05fe 012B     		cmp	r3, #1
+ 1004 0600 04D1     		bne	.L34
+ 1005              		.loc 1 198 65 discriminator 1
+ 1006 0602 514B     		ldr	r3, .L48+24
+ 1007 0604 40F2E242 		movw	r2, #1250
+ 1008 0608 1A60     		str	r2, [r3]
+ 1009 060a 1EE0     		b	.L21
+ 1010              	.L34:
+ 199:Core/Src/main.c ****                 else Flicker_Led5Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 1011              		.loc 1 199 44
+ 1012 060c 4E4B     		ldr	r3, .L48+24
+ 1013 060e 40F2CA22 		movw	r2, #714
+ 1014 0612 1A60     		str	r2, [r3]
+ 1015 0614 19E0     		b	.L21
+ 1016              	.L32:
+ 200:Core/Src/main.c ****             }
+ 201:Core/Src/main.c ****             else if (Btn3_State == 5){
+ 1017              		.loc 1 201 33
+ 1018 0616 464B     		ldr	r3, .L48
+ 1019 0618 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1020              		.loc 1 201 21
+ 1021 061a 052B     		cmp	r3, #5
+ 1022 061c 15D1     		bne	.L21
+ 202:Core/Src/main.c ****                 if (Btn2_State == 0) Flicker_Led6Frequency = FLICKER_PERIOD_0_3_HZ_MS;
+ 1023              		.loc 1 202 32
+ 1024 061e 454B     		ldr	r3, .L48+4
+ 1025 0620 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1026              		.loc 1 202 20
+ 1027 0622 002B     		cmp	r3, #0
+ 1028 0624 04D1     		bne	.L35
+ 1029              		.loc 1 202 60 discriminator 1
+ 1030 0626 494B     		ldr	r3, .L48+28
+ 1031 0628 40F60552 		movw	r2, #3333
+ 1032 062c 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 22
+
+
+ 1033 062e 0CE0     		b	.L21
+ 1034              	.L35:
+ 203:Core/Src/main.c ****                 else if (Btn2_State == 1) Flicker_Led6Frequency = FLICKER_PERIOD_0_8_HZ_MS;
+ 1035              		.loc 1 203 37
+ 1036 0630 404B     		ldr	r3, .L48+4
+ 1037 0632 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1038              		.loc 1 203 25
+ 1039 0634 012B     		cmp	r3, #1
+ 1040 0636 04D1     		bne	.L36
+ 1041              		.loc 1 203 65 discriminator 1
+ 1042 0638 444B     		ldr	r3, .L48+28
+ 1043 063a 40F2E242 		movw	r2, #1250
+ 1044 063e 1A60     		str	r2, [r3]
+ 1045 0640 03E0     		b	.L21
+ 1046              	.L36:
+ 204:Core/Src/main.c ****                 else Flicker_Led6Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 1047              		.loc 1 204 44
+ 1048 0642 424B     		ldr	r3, .L48+28
+ 1049 0644 40F2CA22 		movw	r2, #714
+ 1050 0648 1A60     		str	r2, [r3]
+ 1051              	.L21:
+ 205:Core/Src/main.c ****             }
+ 206:Core/Src/main.c ****             //if (Btn2_State == 0) FlickerFrequency = FLICKER_PERIOD_0_3_HZ_MS;
+ 207:Core/Src/main.c ****             //else if (Btn2_State == 1) FlickerFrequency = FLICKER_PERIOD_0_8_HZ_MS;
+ 208:Core/Src/main.c ****             //else FlickerFrequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 209:Core/Src/main.c ****             if (GlobalTickCount == 1){
+ 1052              		.loc 1 209 33
+ 1053 064a 414B     		ldr	r3, .L48+32
+ 1054 064c 1B68     		ldr	r3, [r3]
+ 1055              		.loc 1 209 16
+ 1056 064e 012B     		cmp	r3, #1
+ 1057 0650 05D1     		bne	.L37
+ 210:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS6);
+ 1058              		.loc 1 210 17
+ 1059 0652 404B     		ldr	r3, .L48+36
+ 1060 0654 9B69     		ldr	r3, [r3, #24]
+ 1061 0656 3F4A     		ldr	r2, .L48+36
+ 1062 0658 43F04003 		orr	r3, r3, #64
+ 1063 065c 9361     		str	r3, [r2, #24]
+ 1064              	.L37:
+ 211:Core/Src/main.c ****             }
+ 212:Core/Src/main.c ****             if (GlobalTickCount  == POWERON_PERIOD / 6){
+ 1065              		.loc 1 212 34
+ 1066 065e 3C4B     		ldr	r3, .L48+32
+ 1067 0660 1B68     		ldr	r3, [r3]
+ 1068              		.loc 1 212 16
+ 1069 0662 B3F5FA6F 		cmp	r3, #2000
+ 1070 0666 05D1     		bne	.L38
+ 213:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BS7);
+ 1071              		.loc 1 213 17
+ 1072 0668 3A4B     		ldr	r3, .L48+36
+ 1073 066a 9B69     		ldr	r3, [r3, #24]
+ 1074 066c 394A     		ldr	r2, .L48+36
+ 1075 066e 43F08003 		orr	r3, r3, #128
+ 1076 0672 9361     		str	r3, [r2, #24]
+ 1077              	.L38:
+ 214:Core/Src/main.c ****             }
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 23
+
+
+ 215:Core/Src/main.c ****             if ((GlobalTickCount  == 2 * POWERON_PERIOD / 6)){
+ 1078              		.loc 1 215 35
+ 1079 0674 364B     		ldr	r3, .L48+32
+ 1080 0676 1B68     		ldr	r3, [r3]
+ 1081              		.loc 1 215 16
+ 1082 0678 B3F57A6F 		cmp	r3, #4000
+ 1083 067c 05D1     		bne	.L39
+ 216:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS5);  
+ 1084              		.loc 1 216 17
+ 1085 067e 364B     		ldr	r3, .L48+40
+ 1086 0680 9B69     		ldr	r3, [r3, #24]
+ 1087 0682 354A     		ldr	r2, .L48+40
+ 1088 0684 43F02003 		orr	r3, r3, #32
+ 1089 0688 9361     		str	r3, [r2, #24]
+ 1090              	.L39:
+ 217:Core/Src/main.c ****             } 
+ 218:Core/Src/main.c ****             if (GlobalTickCount  == 3 * POWERON_PERIOD / 6){
+ 1091              		.loc 1 218 34
+ 1092 068a 314B     		ldr	r3, .L48+32
+ 1093 068c 1B68     		ldr	r3, [r3]
+ 1094              		.loc 1 218 16
+ 1095 068e 41F27072 		movw	r2, #6000
+ 1096 0692 9342     		cmp	r3, r2
+ 1097 0694 05D1     		bne	.L40
+ 219:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS3);
+ 1098              		.loc 1 219 17
+ 1099 0696 304B     		ldr	r3, .L48+40
+ 1100 0698 9B69     		ldr	r3, [r3, #24]
+ 1101 069a 2F4A     		ldr	r2, .L48+40
+ 1102 069c 43F00803 		orr	r3, r3, #8
+ 1103 06a0 9361     		str	r3, [r2, #24]
+ 1104              	.L40:
+ 220:Core/Src/main.c ****             }  
+ 221:Core/Src/main.c ****             if (GlobalTickCount  == 4 * POWERON_PERIOD / 6){
+ 1105              		.loc 1 221 34
+ 1106 06a2 2B4B     		ldr	r3, .L48+32
+ 1107 06a4 1B68     		ldr	r3, [r3]
+ 1108              		.loc 1 221 16
+ 1109 06a6 B3F5FA5F 		cmp	r3, #8000
+ 1110 06aa 05D1     		bne	.L41
+ 222:Core/Src/main.c ****                 SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BS4);
+ 1111              		.loc 1 222 17
+ 1112 06ac 2B4B     		ldr	r3, .L48+44
+ 1113 06ae 9B69     		ldr	r3, [r3, #24]
+ 1114 06b0 2A4A     		ldr	r2, .L48+44
+ 1115 06b2 43F01003 		orr	r3, r3, #16
+ 1116 06b6 9361     		str	r3, [r2, #24]
+ 1117              	.L41:
+ 223:Core/Src/main.c ****             }   
+ 224:Core/Src/main.c ****             if (GlobalTickCount  == 5 * POWERON_PERIOD / 6){
+ 1118              		.loc 1 224 34
+ 1119 06b8 254B     		ldr	r3, .L48+32
+ 1120 06ba 1B68     		ldr	r3, [r3]
+ 1121              		.loc 1 224 16
+ 1122 06bc 42F21072 		movw	r2, #10000
+ 1123 06c0 9342     		cmp	r3, r2
+ 1124 06c2 05D1     		bne	.L42
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 24
+
+
+ 225:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BS4);
+ 1125              		.loc 1 225 17
+ 1126 06c4 244B     		ldr	r3, .L48+40
+ 1127 06c6 9B69     		ldr	r3, [r3, #24]
+ 1128 06c8 234A     		ldr	r2, .L48+40
+ 1129 06ca 43F01003 		orr	r3, r3, #16
+ 1130 06ce 9361     		str	r3, [r2, #24]
+ 1131              	.L42:
+ 226:Core/Src/main.c ****             } 
+ 227:Core/Src/main.c ****             if (GlobalTickCount  == 6 * POWERON_PERIOD / 6) {
+ 1132              		.loc 1 227 34
+ 1133 06d0 1F4B     		ldr	r3, .L48+32
+ 1134 06d2 1B68     		ldr	r3, [r3]
+ 1135              		.loc 1 227 16
+ 1136 06d4 42F6E062 		movw	r2, #12000
+ 1137 06d8 9342     		cmp	r3, r2
+ 1138 06da 7FF49BAC 		bne	.L43
+ 228:Core/Src/main.c ****                 GlobalTickCount = 0;
+ 1139              		.loc 1 228 33
+ 1140 06de 1C4B     		ldr	r3, .L48+32
+ 1141 06e0 0022     		movs	r2, #0
+ 1142 06e2 1A60     		str	r2, [r3]
+ 229:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR6);
+ 1143              		.loc 1 229 17
+ 1144 06e4 1B4B     		ldr	r3, .L48+36
+ 1145 06e6 9B69     		ldr	r3, [r3, #24]
+ 1146 06e8 1A4A     		ldr	r2, .L48+36
+ 1147 06ea 43F48003 		orr	r3, r3, #4194304
+ 1148 06ee 9361     		str	r3, [r2, #24]
+ 230:Core/Src/main.c ****                 SET_BIT(GPIOC->BSRR,  GPIO_BSRR_BR7);
+ 1149              		.loc 1 230 17
+ 1150 06f0 184B     		ldr	r3, .L48+36
+ 1151 06f2 9B69     		ldr	r3, [r3, #24]
+ 1152 06f4 174A     		ldr	r2, .L48+36
+ 1153 06f6 43F40003 		orr	r3, r3, #8388608
+ 1154 06fa 9361     		str	r3, [r2, #24]
+ 231:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR5);
+ 1155              		.loc 1 231 17
+ 1156 06fc 164B     		ldr	r3, .L48+40
+ 1157 06fe 9B69     		ldr	r3, [r3, #24]
+ 1158 0700 154A     		ldr	r2, .L48+40
+ 1159 0702 43F40013 		orr	r3, r3, #2097152
+ 1160 0706 9361     		str	r3, [r2, #24]
+ 232:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR3);
+ 1161              		.loc 1 232 17
+ 1162 0708 134B     		ldr	r3, .L48+40
+ 1163 070a 9B69     		ldr	r3, [r3, #24]
+ 1164 070c 124A     		ldr	r2, .L48+40
+ 1165 070e 43F40023 		orr	r3, r3, #524288
+ 1166 0712 9361     		str	r3, [r2, #24]
+ 233:Core/Src/main.c ****                 SET_BIT(GPIOA->BSRR,  GPIO_BSRR_BR4);
+ 1167              		.loc 1 233 17
+ 1168 0714 114B     		ldr	r3, .L48+44
+ 1169 0716 9B69     		ldr	r3, [r3, #24]
+ 1170 0718 104A     		ldr	r2, .L48+44
+ 1171 071a 43F48013 		orr	r3, r3, #1048576
+ 1172 071e 9361     		str	r3, [r2, #24]
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 25
+
+
+ 234:Core/Src/main.c ****                 SET_BIT(GPIOB->BSRR,  GPIO_BSRR_BR4);
+ 1173              		.loc 1 234 17
+ 1174 0720 0D4B     		ldr	r3, .L48+40
+ 1175 0722 9B69     		ldr	r3, [r3, #24]
+ 1176 0724 0C4A     		ldr	r2, .L48+40
+ 1177 0726 43F48013 		orr	r3, r3, #1048576
+ 1178 072a 9361     		str	r3, [r2, #24]
+ 1179              	.L5:
+  37:Core/Src/main.c ****             Flicker_Led1Frequency = FLICKER_PERIOD_1_4_HZ_MS;
+ 1180              		.loc 1 37 12
+ 1181 072c 72E4     		b	.L43
+ 1182              	.L49:
+ 1183 072e 00BF     		.align	2
+ 1184              	.L48:
+ 1185 0730 00000000 		.word	Btn3_State
+ 1186 0734 00000000 		.word	Btn2_State
+ 1187 0738 00000000 		.word	Flicker_Led1Frequency
+ 1188 073c 00000000 		.word	Flicker_Led2Frequency
+ 1189 0740 00000000 		.word	Flicker_Led3Frequency
+ 1190 0744 00000000 		.word	Flicker_Led4Frequency
+ 1191 0748 00000000 		.word	Flicker_Led5Frequency
+ 1192 074c 00000000 		.word	Flicker_Led6Frequency
+ 1193 0750 00000000 		.word	GlobalTickCount
+ 1194 0754 00080240 		.word	1073874944
+ 1195 0758 00040240 		.word	1073873920
+ 1196 075c 00000240 		.word	1073872896
+ 1197              		.cfi_endproc
+ 1198              	.LFE130:
+ 1200              		.text
+ 1201              	.Letext0:
+ 1202              		.file 2 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/machine/_default_types.h
+ 1203              		.file 3 "C:/CMPT/Tools/arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/sys/_stdint.h"
+ 1204              		.file 4 "CMSIS/Devices/STM32F4xx/Inc/STM32F429xx/stm32f429xx.h"
+ 1205              		.file 5 "Core/Inc/init.h"
+ARM GAS  C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s 			page 26
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:25     .bss.GlobalTickCount:00000000 GlobalTickCount
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:22     .bss.GlobalTickCount:00000000 $d
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:31     .bss.LedState:00000000 LedState
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:32     .bss.LedState:00000000 $d
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:37     .bss.Btn1_State:00000000 Btn1_State
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:38     .bss.Btn1_State:00000000 $d
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:43     .bss.Btn2_State:00000000 Btn2_State
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:44     .bss.Btn2_State:00000000 $d
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:49     .bss.Btn3_State:00000000 Btn3_State
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:50     .bss.Btn3_State:00000000 $d
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:55     .bss.PairLedState:00000000 PairLedState
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:56     .bss.PairLedState:00000000 $d
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:62     .data.FlickerFrequency:00000000 FlickerFrequency
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:59     .data.FlickerFrequency:00000000 $d
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:65     .text.main:00000000 $t
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:71     .text.main:00000000 main
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:428    .text.main:00000274 $d
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:437    .text.main:00000290 $t
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:753    .text.main:000004c8 $d
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:762    .text.main:000004e4 $t
-C:\Users\Arthur\AppData\Local\Temp\cctrsrZX.s:899    .text.main:000005d0 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:25     .bss.GlobalTickCount:00000000 GlobalTickCount
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:22     .bss.GlobalTickCount:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:31     .bss.LedState:00000000 LedState
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:32     .bss.LedState:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:37     .bss.Btn1_State:00000000 Btn1_State
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:38     .bss.Btn1_State:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:43     .bss.Btn2_State:00000000 Btn2_State
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:44     .bss.Btn2_State:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:49     .bss.Btn3_State:00000000 Btn3_State
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:50     .bss.Btn3_State:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:55     .bss.PairLedState:00000000 PairLedState
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:56     .bss.PairLedState:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:61     .bss.Led1_State:00000000 Led1_State
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:62     .bss.Led1_State:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:67     .bss.Led2_State:00000000 Led2_State
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:68     .bss.Led2_State:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:73     .bss.Led3_State:00000000 Led3_State
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:74     .bss.Led3_State:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:79     .bss.Led4_State:00000000 Led4_State
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:80     .bss.Led4_State:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:85     .bss.Led5_State:00000000 Led5_State
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:86     .bss.Led5_State:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:91     .bss.Led6_State:00000000 Led6_State
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:92     .bss.Led6_State:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:98     .data.Flicker_Led1Frequency:00000000 Flicker_Led1Frequency
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:95     .data.Flicker_Led1Frequency:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:105    .data.Flicker_Led2Frequency:00000000 Flicker_Led2Frequency
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:102    .data.Flicker_Led2Frequency:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:112    .data.Flicker_Led3Frequency:00000000 Flicker_Led3Frequency
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:109    .data.Flicker_Led3Frequency:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:119    .data.Flicker_Led4Frequency:00000000 Flicker_Led4Frequency
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:116    .data.Flicker_Led4Frequency:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:126    .data.Flicker_Led5Frequency:00000000 Flicker_Led5Frequency
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:123    .data.Flicker_Led5Frequency:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:133    .data.Flicker_Led6Frequency:00000000 Flicker_Led6Frequency
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:130    .data.Flicker_Led6Frequency:00000000 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:136    .text.main:00000000 $t
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:142    .text.main:00000000 main
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:487    .text.main:00000264 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:502    .text.main:00000298 $t
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:830    .text.main:000004f0 $d
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:838    .text.main:00000508 $t
+C:\Users\Arthur\AppData\Local\Temp\ccpQwcKa.s:1185   .text.main:00000730 $d
 
 UNDEFINED SYMBOLS
 GPIO_Init
